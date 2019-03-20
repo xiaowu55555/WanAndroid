@@ -99,12 +99,6 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
         }
     }
 
-    protected abstract T createViewModel();
-
-    protected abstract void initView(View rootView);
-
-    protected abstract int getLayoutRes();
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -117,6 +111,12 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
             onLazyLoad();
         }
     }
+
+    protected abstract int getLayoutRes();
+
+    protected abstract void initView(View rootView);
+
+    protected abstract T createViewModel();
 
     protected abstract void onLazyLoad();
 }
