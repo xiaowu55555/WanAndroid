@@ -16,7 +16,7 @@
             android:background="@color/color_app_divider"
             app:indicator_drawable_selected="@color/colorPrimary"
             app:indicator_drawable_unselected="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll"
             app:title_height="24dp"
             app:title_textsize="12sp" />
 

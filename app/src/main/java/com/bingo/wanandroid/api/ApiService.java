@@ -19,6 +19,9 @@ public interface ApiService {
     @GET("banner/json")
     Observable<HttpResult<List<HomeBanner>>> getBanner();
 
+    //置顶文章
+//    @GET("article/top/json")
+
     //获取首页文章列表
     @GET("article/list/{pageIndex}/json")
     Observable<HttpResult<Article>> getLastArticle(@Path("pageIndex") int pageIndex);
