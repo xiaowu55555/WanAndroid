@@ -13,10 +13,6 @@ import java.util.Random;
 
 public class WxArticleAdapter extends BaseQuickAdapter<WxArticle, BaseViewHolder> {
 
-    private String[] colors = {"#FF4CAF50","#FF009688","#FF2196F3",
-            "#FFFF5722", "#FF00BCD4", "#FFA45E", "#FFF57A", "#C9FF82",
-            "#75FFDA", "#70C2FF", "#6F81FF", "#A561FF", "#FF6B6B"};
-
     public WxArticleAdapter(int layoutResId) {
         super(layoutResId);
     }
@@ -25,6 +21,7 @@ public class WxArticleAdapter extends BaseQuickAdapter<WxArticle, BaseViewHolder
     protected void convert(BaseViewHolder helper, WxArticle item) {
         helper.setText(R.id.tv_name, item.getName());
         TextView tvName = helper.getView(R.id.tv_name);
+        String[] colors = mContext.getResources().getStringArray(R.array.random_color);
         tvName.setBackgroundColor(Color.parseColor(colors[new Random().nextInt(colors.length)]));
     }
 }

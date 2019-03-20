@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="random_color">
+        <item>#FF4CAF50</item>
+        <item>#FF009688</item>
+        <item>#FF2196F3</item>
+        <item>#FFFF5722</item>
+        <item>#FF00BCD4</item>
+        <item>#FFA45E</item>
+        <item>#FFF57A</item>
+        <item>#C9FF82</item>
+        <item>#75FFDA</item>
+        <item>#70C2FF</item>
+        <item>#6F81FF</item>
+        <item>#A561FF</item>
+        <item>#FF6B6B</item>
+    </string-array>
+</resources>

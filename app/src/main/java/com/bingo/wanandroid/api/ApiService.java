@@ -34,4 +34,8 @@ public interface ApiService {
     @GET("wxarticle/chapters/json")
     Observable<HttpResult<List<WxArticle>>> getWxarticleChapters();
 
+    //查看某个公众号历史数据
+    @GET("wxarticle/list/{id}/{pageIndex}/json")
+    Observable<HttpResult<List<WxArticle>>> getWxarticleList(@Path("id") long id, @Path("pageIndex") int pageIndex);
+
 }
