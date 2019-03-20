@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import com.bingo.wanandroid.R;
+import com.bingo.wanandroid.ui.blog.TabWxArticleFragment;
 import com.bingo.wanandroid.ui.home.TabHomeFragment;
 import com.frame.library.base.BaseActivity;
 import com.frame.library.base.BaseViewModel;
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         BottomNavigationView navigation = findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
-//        fragments.add(Fragment1.newInstance());
+        fragments.add(TabWxArticleFragment.newInstance());
 //        fragments.add(Fragment1.newInstance());
 //        fragments.add(Fragment1.newInstance());
         switchManager = new FragmentSwitchManager(getSupportFragmentManager(), fragments, R.id.fl_content);

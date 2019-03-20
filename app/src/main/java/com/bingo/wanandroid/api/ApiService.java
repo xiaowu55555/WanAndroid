@@ -3,6 +3,7 @@ package com.bingo.wanandroid.api;
 import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.HomeBanner;
 import com.bingo.wanandroid.entity.Project;
+import com.bingo.wanandroid.entity.WxArticle;
 
 import java.util.List;
 
@@ -25,4 +26,9 @@ public interface ApiService {
     //首页最新项目
     @GET("article/listproject/{pageIndex}/json")
     Observable<HttpResult<Project>> getLastProject(@Path("pageIndex") int pageIndex);
+
+    //获取公众号列表
+    @GET("wxarticle/chapters/json")
+    Observable<HttpResult<List<WxArticle>>> getWxarticleChapters();
+
 }
