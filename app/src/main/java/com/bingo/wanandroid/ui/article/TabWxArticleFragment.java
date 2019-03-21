@@ -1,11 +1,8 @@
-package com.bingo.wanandroid.ui.blog;
+package com.bingo.wanandroid.ui.article;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.os.Bundle;
-import android.support.design.internal.BaselineLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,7 +22,7 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
 
     @Override
     protected void onItemClick(WxArticle item) {
-
+        ArticleListActivity.start(context, item);
     }
 
     @Override

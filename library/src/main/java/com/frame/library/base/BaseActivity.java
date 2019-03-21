@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.frame.library.R;
 import com.frame.library.event.ActionEvent;
@@ -15,7 +17,7 @@ import com.frame.library.widget.LoadingPopView;
 import com.frame.library.widget.MultipleStatusView;
 import com.lxj.xpopup.XPopup;
 
-public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     protected Context context;
     protected T viewModel;
     protected MultipleStatusView statusView;
@@ -44,7 +46,35 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
             swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
             swipeRefreshLayout.setOnRefreshListener(this);
         }
+        getIntentData();
+        initToolBar();
         initView(savedInstanceState);
+    }
+
+    private void initToolBar() {
+        TextView tv_title = findViewById(R.id.tv_title);
+        if (tv_title != null) {
+            tv_title.setSelected(true);
+            tv_title.setText(setTitle());
+        }
+        Toolbar toolbar = findViewById(R.id.tool_bar);
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
+            toolbar.setNavigationOnClickListener(v -> finish());
+            setToolBarMemu(toolbar);
+        }
+    }
+
+    protected void setToolBarMemu(Toolbar toolbar) {
+
+    }
+
+    protected String setTitle() {
+        return "";
+    }
+
+    protected void getIntentData() {
+
     }
 
     protected void onRetry() {
@@ -112,7 +142,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
 
     protected abstract T createViewModel();
 
-    protected void showContent(){
+    protected void showContent() {
         if (statusView != null && statusView.getViewStatus() == MultipleStatusView.STATUS_LOADING) {
             statusView.showContent();
         }

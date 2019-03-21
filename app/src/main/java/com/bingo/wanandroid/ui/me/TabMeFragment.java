@@ -1,6 +1,5 @@
 package com.bingo.wanandroid.ui.me;
 
-import android.os.Bundle;
 import android.view.View;
 
 import com.bingo.wanandroid.R;

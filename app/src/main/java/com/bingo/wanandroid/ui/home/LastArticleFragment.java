@@ -1,10 +1,13 @@
 package com.bingo.wanandroid.ui.home;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ArticleAdapter;
 import com.bingo.wanandroid.entity.Article;
+import com.bingo.wanandroid.ui.DetailActivity;
 import com.bingo.wanandroid.viewmodel.ArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -18,7 +21,7 @@ public class LastArticleFragment extends BaseListFragment<Article.DatasBean, Art
 
     @Override
     protected void onItemClick(Article.DatasBean item) {
-
+        DetailActivity.start(context,item.getLink(),item.getTitle());
     }
 
     @Override
@@ -28,7 +31,15 @@ public class LastArticleFragment extends BaseListFragment<Article.DatasBean, Art
 
     @Override
     protected void requestData() {
-        viewModel.getLastArticle(pageIndex).observe(this, new ListObserver());
+        viewModel.getLastArticle(pageIndex).observe(this, new Observer<Article>() {
+            @Override
+            public void onChanged(@Nullable Article article) {
+                if (article != null) {
+                    pageSize = article.getSize();
+                    setListData(article.getDatas());
+                }
+            }
+        });
     }
 
     @Override

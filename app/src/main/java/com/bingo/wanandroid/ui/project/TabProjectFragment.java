@@ -51,15 +51,12 @@ public class TabProjectFragment extends BaseFragment<ProjectViewModel> {
             }
         };
         flowLayout.setAdapter(adapter);
-        flowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-            @Override
-            public boolean onTagClick(View view, int position, FlowLayout parent) {
-                ProjectTree tree = treeList.get(position);
-                if (tree != null) {
-
-                }
-                return false;
+        flowLayout.setOnTagClickListener((view, position, parent) -> {
+            ProjectTree tree = treeList.get(position);
+            if (tree != null) {
+                ProjectListActivity.start(context, tree);
             }
+            return false;
         });
     }
 

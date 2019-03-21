@@ -1,6 +1,11 @@
 package com.bingo.wanandroid.entity;
 
-public class WxArticle {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class WxArticle implements Parcelable {
+
+
 
 
     /**
@@ -76,4 +81,45 @@ public class WxArticle {
     public void setVisible(int visible) {
         this.visible = visible;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.courseId);
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.order);
+        dest.writeLong(this.parentChapterId);
+        dest.writeByte(this.userControlSetTop ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.visible);
+    }
+
+    public WxArticle() {
+    }
+
+    protected WxArticle(Parcel in) {
+        this.courseId = in.readLong();
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.order = in.readString();
+        this.parentChapterId = in.readLong();
+        this.userControlSetTop = in.readByte() != 0;
+        this.visible = in.readInt();
+    }
+
+    public static final Creator<WxArticle> CREATOR = new Creator<WxArticle>() {
+        @Override
+        public WxArticle createFromParcel(Parcel source) {
+            return new WxArticle(source);
+        }
+
+        @Override
+        public WxArticle[] newArray(int size) {
+            return new WxArticle[size];
+        }
+    };
 }

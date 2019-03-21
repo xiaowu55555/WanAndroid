@@ -1,6 +1,5 @@
 package com.frame.library.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ public abstract class WebViewActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        url = getIntent().getStringExtra(Intent.EXTRA_ORIGINATING_URI);
         if (url != null) {
             mAgentWeb = AgentWeb.with(this)
                     .setAgentWebParent(getWebContentView(), new LinearLayout.LayoutParams(-1, -1))

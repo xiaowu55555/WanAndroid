@@ -63,11 +63,11 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
                 adapter.setNewData(list);
             } else {
                 adapter.addData(list);
-                if (list.size() < pageSize) {
-                    adapter.loadMoreEnd();
-                } else {
-                    adapter.loadMoreComplete();
-                }
+            }
+            if (list.size() < pageSize) {
+                adapter.loadMoreEnd();
+            } else {
+                adapter.loadMoreComplete();
             }
         }
         adapter.setEnableLoadMore(enableLoadMore());

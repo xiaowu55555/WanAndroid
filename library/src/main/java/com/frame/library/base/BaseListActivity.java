@@ -61,11 +61,11 @@ public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseA
                 adapter.setNewData(list);
             } else {
                 adapter.addData(list);
-                if (list.size() < pageSize) {
-                    adapter.loadMoreEnd();
-                } else {
-                    adapter.loadMoreComplete();
-                }
+            }
+            if (list.size() < pageSize) {
+                adapter.loadMoreEnd();
+            } else {
+                adapter.loadMoreComplete();
             }
         }
         adapter.setEnableLoadMore(enableLoadMore());
@@ -108,7 +108,7 @@ public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseA
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.base_list_layout;
+        return R.layout.base_list_activity_layout;
     }
 
     @Override

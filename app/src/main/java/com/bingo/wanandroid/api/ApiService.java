@@ -11,6 +11,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -37,14 +38,14 @@ public interface ApiService {
 
     //查看某个公众号历史数据
     @GET("wxarticle/list/{id}/{pageIndex}/json")
-    Observable<HttpResult<List<WxArticle>>> getWxarticleList(@Path("id") long id, @Path("pageIndex") int pageIndex);
+    Observable<HttpResult<Article>> getWxarticleList(@Path("id") long id, @Path("pageIndex") int pageIndex);
 
     //项目分类
     @GET("project/tree/json")
     Observable<HttpResult<List<ProjectTree>>> getProjectTree();
 
     //项目列表数据
-    @GET("project/list/{pageIndex}/json?cid={cid}")
-    Observable<HttpResult<Project>> getProjectList(@Path("pageIndex") int pageIndex, @Path("cid") long cid);
+    @GET("project/list/{pageIndex}/json")
+    Observable<HttpResult<Project>> getProjectList(@Path("pageIndex") int pageIndex, @Query("cid") long cid);
 
 }

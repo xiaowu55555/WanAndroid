@@ -7,6 +7,7 @@
     android:layout_height="?actionBarSize"
     android:background="@color/colorPrimary"
     android:elevation="2dp"
+    app:popupTheme="@style/ToolbarPopupTheme"
     android:orientation="vertical"
     tools:targetApi="lollipop">
 
@@ -15,6 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

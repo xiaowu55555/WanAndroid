@@ -20,14 +20,14 @@ public class ProjectViewModel extends BaseViewModel {
     }
 
     //最新文章
-    public MutableLiveData<List<Project.DatasBean>> getLastProject(int page) {
-        MutableLiveData<List<Project.DatasBean>> data = new MutableLiveData<>();
+    public MutableLiveData<Project> getLastProject(int page) {
+        MutableLiveData<Project> data = new MutableLiveData<>();
         App.getInstance().getApi().getLastProject(page)
                 .compose(RxTransformer.applySchedulers())
                 .subscribe(new RxSubscriber<Project>(this) {
                     @Override
                     public void onSuccess(Project project) {
-                        data.setValue(project.getDatas());
+                        data.setValue(project);
                     }
 
                     @Override
@@ -61,7 +61,7 @@ public class ProjectViewModel extends BaseViewModel {
     //项目列表数据 返回size为15 要单独处理TT
     public MutableLiveData<Project> getProject(int page, long cid) {
         MutableLiveData<Project> data = new MutableLiveData<>();
-        App.getInstance().getApi().getProjectList(page, cid)
+        App.getInstance().getApi().getProjectList(page + 1, cid)
                 .compose(RxTransformer.applySchedulers())
                 .subscribe(new RxSubscriber<Project>(this) {
                     @Override
