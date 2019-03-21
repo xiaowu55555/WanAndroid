@@ -1,17 +1,16 @@
 package com.bingo.wanandroid.ui.home;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.os.Bundle;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ProjectAdapter;
 import com.bingo.wanandroid.entity.Project;
-import com.bingo.wanandroid.viewmodel.LastProjectViewModel;
+import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListFragment;
 
-public class LastProjectFragment extends BaseListFragment<Project.DatasBean, LastProjectViewModel> {
+public class LastProjectFragment extends BaseListFragment<Project.DatasBean, ProjectViewModel> {
 
     public static LastProjectFragment newInstance() {
         return new LastProjectFragment();
@@ -29,11 +28,11 @@ public class LastProjectFragment extends BaseListFragment<Project.DatasBean, Las
 
     @Override
     protected void requestData() {
-        viewModel.getData(pageIndex).observe(this, new ListObserver());
+        viewModel.getLastProject(pageIndex).observe(this, new ListObserver());
     }
 
     @Override
-    protected LastProjectViewModel createViewModel() {
-        return ViewModelProviders.of(this).get(LastProjectViewModel.class);
+    protected ProjectViewModel createViewModel() {
+        return ViewModelProviders.of(this).get(ProjectViewModel.class);
     }
 }

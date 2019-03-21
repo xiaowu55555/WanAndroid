@@ -21,7 +21,6 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
         BaseQuickAdapter.RequestLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
     protected RecyclerView recyclerView;
-    protected SwipeRefreshLayout swipeRefreshLayout;
     protected BaseQuickAdapter<V, BaseViewHolder> adapter;
     protected int pageIndex = 0;
     protected int pageSize = 20;
@@ -44,18 +43,6 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
             adapter.setOnLoadMoreListener(this, recyclerView);
             adapter.disableLoadMoreIfNotFullPage();
         }
-        if (enableRefresh() && swipeRefreshLayout != null) {
-            swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-            swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
-            swipeRefreshLayout.setOnRefreshListener(this);
-        }
-        if (statusView != null) {
-            statusView.showLoading();
-            statusView.setOnRetryClickListener(v -> {
-                statusView.showLoading();
-                requestData();
-            });
-        }
     }
 
     @Override
@@ -69,12 +56,7 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
     protected abstract void onItemClick(V item);
 
     protected void setListData(List<V> list) {
-        if (statusView != null && statusView.getViewStatus() == MultipleStatusView.STATUS_LOADING) {
-            statusView.showContent();
-        }
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
+        showContent();
         adapter.setEmptyView(getEmptyView());
         if (list != null && list.size() > 0) {
             if (pageIndex == 0) {
@@ -94,9 +76,6 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
     @Override
     protected void showError(String message) {
         ToastUtil.showToast(message);
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
         adapter.setEnableLoadMore(enableLoadMore());
         if (pageIndex == 0 && statusView != null) {
             if (!NetworkUtils.isNetworkAvailable(Library.getInstance().getContext())) {
@@ -113,6 +92,7 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
         return View.inflate(context, R.layout.empty_view, null);
     }
 
+    @Override
     protected boolean enableRefresh() {
         return true;
     }
@@ -133,6 +113,11 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
     }
 
     protected abstract void requestData();
+
+    @Override
+    protected void onRetry() {
+        requestData();
+    }
 
     @Override
     public void onLoadMoreRequested() {

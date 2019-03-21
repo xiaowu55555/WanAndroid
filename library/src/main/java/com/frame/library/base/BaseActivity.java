@@ -3,6 +3,7 @@ package com.frame.library.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import com.frame.library.R;
@@ -14,10 +15,11 @@ import com.frame.library.widget.LoadingPopView;
 import com.frame.library.widget.MultipleStatusView;
 import com.lxj.xpopup.XPopup;
 
-public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     protected Context context;
     protected T viewModel;
     protected MultipleStatusView statusView;
+    protected SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -29,10 +31,31 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         viewModel = createViewModel();
         observeActionEvent();
         statusView = findViewById(R.id.stateful_layout);
+        if (statusView != null) {
+            statusView.showLoading();
+            statusView.setOnRetryClickListener(v -> {
+                statusView.showLoading();
+                onRetry();
+            });
+        }
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        if (enableRefresh() && swipeRefreshLayout != null) {
+            swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+            swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
+            swipeRefreshLayout.setOnRefreshListener(this);
+        }
         initView(savedInstanceState);
     }
 
+    protected void onRetry() {
+
+    }
+
     protected void beforeSetContentView() {
+    }
+
+    protected boolean enableRefresh() {
+        return false;
     }
 
     protected abstract int getLayoutRes();
@@ -40,9 +63,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     private void observeActionEvent() {
         if (viewModel != null) {
             viewModel.getAction().observe(this, actionEvent -> {
-                if (statusView != null && statusView.getViewStatus() == MultipleStatusView.STATUS_LOADING) {
-                    statusView.showContent();
-                }
+                showContent();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:
                         showLoading();
@@ -83,9 +104,22 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         }
     }
 
+    @Override
+    public void onRefresh() {
+    }
+
     protected abstract void initView(Bundle savedInstanceState);
 
     protected abstract T createViewModel();
+
+    protected void showContent(){
+        if (statusView != null && statusView.getViewStatus() == MultipleStatusView.STATUS_LOADING) {
+            statusView.showContent();
+        }
+        if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
 
 
 }

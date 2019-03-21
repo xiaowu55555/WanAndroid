@@ -3,6 +3,7 @@ package com.bingo.wanandroid.api;
 import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.HomeBanner;
 import com.bingo.wanandroid.entity.Project;
+import com.bingo.wanandroid.entity.ProjectTree;
 import com.bingo.wanandroid.entity.WxArticle;
 
 import java.util.List;
@@ -37,5 +38,13 @@ public interface ApiService {
     //查看某个公众号历史数据
     @GET("wxarticle/list/{id}/{pageIndex}/json")
     Observable<HttpResult<List<WxArticle>>> getWxarticleList(@Path("id") long id, @Path("pageIndex") int pageIndex);
+
+    //项目分类
+    @GET("project/tree/json")
+    Observable<HttpResult<List<ProjectTree>>> getProjectTree();
+
+    //项目列表数据
+    @GET("project/list/{pageIndex}/json?cid={cid}")
+    Observable<HttpResult<Project>> getProjectList(@Path("pageIndex") int pageIndex, @Path("cid") long cid);
 
 }
