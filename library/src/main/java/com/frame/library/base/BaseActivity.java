@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.frame.library.R;
@@ -22,12 +25,14 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     protected T viewModel;
     protected MultipleStatusView statusView;
     protected SwipeRefreshLayout swipeRefreshLayout;
+    protected static final int PAGE_TYPE_TOOLBAR = 0;
+    protected static final int PAGE_TYPE_NO_TOOLBAR = 1;
+    protected static final int PAGE_TYPE_FULL_SCREEN = 2;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        beforeSetContentView();
         setContentView(getLayoutRes());
         context = this;
         viewModel = createViewModel();
@@ -47,30 +52,22 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
             swipeRefreshLayout.setOnRefreshListener(this);
         }
         getIntentData();
-        initToolBar();
         initView(savedInstanceState);
     }
 
-    private void initToolBar() {
-        TextView tv_title = findViewById(R.id.tv_title);
-        if (tv_title != null) {
-            tv_title.setSelected(true);
-            tv_title.setText(setTitle());
+    @Override
+    public void setContentView(int layoutResID) {
+        if (getPageType() == PAGE_TYPE_TOOLBAR) {
+            ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
+            viewGroup.removeAllViews();
+            LinearLayout parentLinearLayout = new LinearLayout(this);
+            parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
+            viewGroup.addView(parentLinearLayout);
+            LayoutInflater.from(this).inflate(R.layout.inc_title_bar, parentLinearLayout, true);
+            LayoutInflater.from(this).inflate(layoutResID, parentLinearLayout, true);
+        } else {
+            super.setContentView(layoutResID);
         }
-        Toolbar toolbar = findViewById(R.id.tool_bar);
-        if (toolbar != null) {
-            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back));
-            toolbar.setNavigationOnClickListener(v -> finish());
-            setToolBarMemu(toolbar);
-        }
-    }
-
-    protected void setToolBarMemu(Toolbar toolbar) {
-
-    }
-
-    protected String setTitle() {
-        return "";
     }
 
     protected void getIntentData() {
@@ -81,7 +78,8 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
 
     }
 
-    protected void beforeSetContentView() {
+    protected int getPageType() {
+        return PAGE_TYPE_TOOLBAR;//默认返回带toolbar
     }
 
     protected boolean enableRefresh() {

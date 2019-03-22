@@ -34,10 +34,6 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
         }
     }
 
-    @Override
-    protected String setTitle() {
-        return Html.fromHtml(wxArticle.getName()).toString();
-    }
 
     @Override
     protected void onItemClick(Article.DatasBean item) {

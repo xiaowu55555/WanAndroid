@@ -27,6 +27,11 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected int getPageType() {
+        return PAGE_TYPE_NO_TOOLBAR;
+    }
+
+    @Override
     protected void initView(Bundle savedInstanceState) {
 
         BottomNavigationView navigation = findViewById(R.id.bottm_view);

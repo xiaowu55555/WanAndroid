@@ -37,11 +37,6 @@ public class ProjectListActivity extends BaseListActivity<Project.DatasBean, Pro
     }
 
     @Override
-    protected String setTitle() {
-        return Html.fromHtml(tree.getName()).toString();
-    }
-
-    @Override
     protected void onItemClick(Project.DatasBean item) {
         DetailActivity.start(context,item.getLink(),item.getTitle());
     }
