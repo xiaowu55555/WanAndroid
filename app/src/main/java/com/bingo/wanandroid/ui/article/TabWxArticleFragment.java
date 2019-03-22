@@ -13,6 +13,7 @@ import com.bingo.wanandroid.viewmodel.TabWxArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListFragment;
+import com.frame.library.widget.TitleBar;
 
 public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArticleViewModel> {
 
@@ -48,8 +49,7 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        TextView tv_title = rootView.findViewById(R.id.tv_title);
-        tv_title.setText("公众号列表");
+        new TitleBar().bind(context,rootView).setTitle("公众号列表");
     }
 
     @Override

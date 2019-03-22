@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,10 +34,12 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutRes());
         context = this;
         viewModel = createViewModel();
         observeActionEvent();
+        getIntentData();
+        setContentView(getLayoutRes());
+        setToolBar();
         statusView = findViewById(R.id.stateful_layout);
         if (statusView != null) {
             statusView.showLoading();
@@ -51,24 +54,27 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
             swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
             swipeRefreshLayout.setOnRefreshListener(this);
         }
-        getIntentData();
         initView(savedInstanceState);
     }
 
-    @Override
-    public void setContentView(int layoutResID) {
-        if (getPageType() == PAGE_TYPE_TOOLBAR) {
-            ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
-            viewGroup.removeAllViews();
-            LinearLayout parentLinearLayout = new LinearLayout(this);
-            parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
-            viewGroup.addView(parentLinearLayout);
-            LayoutInflater.from(this).inflate(R.layout.inc_title_bar, parentLinearLayout, true);
-            LayoutInflater.from(this).inflate(layoutResID, parentLinearLayout, true);
-        } else {
-            super.setContentView(layoutResID);
-        }
+    protected void setToolBar() {
+
     }
+
+//    @Override
+//    public void setContentView(int layoutResID) {
+//        if (getPageType() == PAGE_TYPE_TOOLBAR) {
+//            ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
+//            viewGroup.removeAllViews();
+//            LinearLayout parentLinearLayout = new LinearLayout(this);
+//            parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
+//            viewGroup.addView(parentLinearLayout);
+//            LayoutInflater.from(this).inflate(R.layout.inc_title_bar, parentLinearLayout, true);
+//            LayoutInflater.from(this).inflate(layoutResID, parentLinearLayout, true);
+//        } else {
+//            super.setContentView(layoutResID);
+//        }
+//    }
 
     protected void getIntentData() {
 

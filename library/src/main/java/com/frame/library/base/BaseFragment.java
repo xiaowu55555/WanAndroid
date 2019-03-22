@@ -67,7 +67,6 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
         initView(rootView);
         return rootView;
     }
-
     protected void onRetry() {
 
     }

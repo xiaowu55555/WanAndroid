@@ -2,10 +2,13 @@ package com.bingo.wanandroid.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.text.Html;
 import android.view.ViewGroup;
 
 import com.bingo.wanandroid.R;
 import com.frame.library.base.WebViewActivity;
+import com.frame.library.widget.TitleBar;
 
 public class DetailActivity extends WebViewActivity {
     private String title;
@@ -18,9 +21,19 @@ public class DetailActivity extends WebViewActivity {
     }
 
     @Override
+    protected int getPageType() {
+        return PAGE_TYPE_TOOLBAR;
+    }
+
+    @Override
     protected void getIntentData() {
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
+    }
+
+    @Override
+    protected void setToolBar() {
+        new TitleBar().bind(this).setTitle(Html.fromHtml(title).toString()).setBack();
     }
 
     @Override
