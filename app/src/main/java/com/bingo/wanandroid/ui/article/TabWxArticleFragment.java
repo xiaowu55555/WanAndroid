@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bingo.wanandroid.R;
@@ -32,6 +33,12 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
     }
 
     @Override
+    protected void setToolBar(LinearLayout rootView) {
+        new TitleBar().bind(context, rootView).setTitle("公众号列表");
+
+    }
+
+    @Override
     protected RecyclerView.LayoutManager getLayoutManager() {
         return new GridLayoutManager(context, 2);
     }
@@ -44,12 +51,6 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_tab_blog;
-    }
-
-    @Override
-    protected void initView(View rootView) {
-        super.initView(rootView);
-        new TitleBar().bind(context,rootView).setTitle("公众号列表");
     }
 
     @Override

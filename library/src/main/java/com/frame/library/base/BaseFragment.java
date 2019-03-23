@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.frame.library.R;
 import com.frame.library.event.ActionEvent;
@@ -25,7 +26,7 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     private boolean isLazyLoaded;//是否已经加载过数据
     protected Context context;
     protected T viewModel;
-    protected View rootView;
+    protected LinearLayout rootView;
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected MultipleStatusView statusView;
 
@@ -46,7 +47,11 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(getLayoutRes(), container, false);
+//            rootView = inflater.inflate(getLayoutRes(), container, false);
+            rootView  = new LinearLayout(context);
+            rootView.setOrientation(LinearLayout.VERTICAL);
+            setToolBar(rootView);
+            LayoutInflater.from(context).inflate(getLayoutRes(), rootView, true);
         }
         statusView = rootView.findViewById(R.id.stateful_layout);
         if (statusView != null) {
@@ -67,6 +72,11 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
         initView(rootView);
         return rootView;
     }
+
+    protected void setToolBar(LinearLayout rootView) {
+
+    }
+
     protected void onRetry() {
 
     }

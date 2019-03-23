@@ -1,23 +1,24 @@
 package com.bingo.wanandroid.ui.home;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.TabFragmentAdapter;
 import com.bingo.wanandroid.entity.HomeBanner;
+import com.bingo.wanandroid.ui.DetailActivity;
 import com.bingo.wanandroid.utils.GlideImageLoader;
 import com.bingo.wanandroid.viewmodel.HomeViewModel;
 import com.frame.library.base.BaseFragment;
+import com.frame.library.widget.TitleBar;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,10 +79,15 @@ public class TabHomeFragment extends BaseFragment<HomeViewModel> {
                 .setImageLoader(new GlideImageLoader())
                 .setImages(mBannerList)
                 .setBannerTitles(mBannerTitles)
-                .setBannerAnimation(Transformer.Default)
                 .isAutoPlay(true)
                 .setDelayTime(3000)
                 .setIndicatorGravity(BannerConfig.RIGHT)
                 .start();
+        mBanner.setOnBannerListener(position -> {
+            HomeBanner banner = mBannerList.get(position);
+            if (banner != null) {
+                DetailActivity.start(context, banner.getUrl(), banner.getTitle());
+            }
+        });
     }
 }

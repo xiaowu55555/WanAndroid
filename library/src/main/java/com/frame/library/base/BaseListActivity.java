@@ -108,7 +108,7 @@ public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseA
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.base_list_activity_layout;
+        return R.layout.base_list_layout;
     }
 
     @Override

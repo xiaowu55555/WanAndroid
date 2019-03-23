@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/inc_title_bar" />
-
     <com.frame.library.widget.MultipleStatusView
         android:id="@+id/stateful_layout"
         android:layout_width="match_parent"

@@ -15,14 +15,15 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String BASE_URL = "http://www.wanandroid.com/";
+    String BASE_URL = "https://www.wanandroid.com/";
 
     //获取首页banner
     @GET("banner/json")
     Observable<HttpResult<List<HomeBanner>>> getBanner();
 
     //置顶文章
-//    @GET("article/top/json")
+    @GET("article/top/json")
+    Observable<HttpResult<List<Article.DatasBean>>> getTopArticle();
 
     //获取首页文章列表
     @GET("article/list/{pageIndex}/json")

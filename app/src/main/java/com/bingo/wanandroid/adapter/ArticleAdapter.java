@@ -28,5 +28,13 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DatasBean, BaseView
             tv_des.setVisibility(View.VISIBLE);
             helper.setText(R.id.tv_des, Html.fromHtml(item.getDesc()));
         }
+        helper.getView(R.id.tv_top).setVisibility(item.getType() == 1 ? View.VISIBLE : View.GONE);
+        helper.getView(R.id.tv_refresh).setVisibility(item.isFresh() ? View.VISIBLE : View.GONE);
+        if (item.getTags() != null && item.getTags().size() > 0) {
+            helper.setText(R.id.tv_tag, item.getTags().get(0).getName());
+            helper.getView(R.id.tv_tag).setVisibility(View.VISIBLE);
+        } else {
+            helper.getView(R.id.tv_tag).setVisibility(View.GONE);
+        }
     }
 }

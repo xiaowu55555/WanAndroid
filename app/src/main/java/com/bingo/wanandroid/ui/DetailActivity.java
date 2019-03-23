@@ -2,7 +2,6 @@ package com.bingo.wanandroid.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Html;
 import android.view.ViewGroup;
 
@@ -33,7 +32,7 @@ public class DetailActivity extends WebViewActivity {
 
     @Override
     protected void setToolBar() {
-        new TitleBar().bind(this).setTitle(Html.fromHtml(title).toString()).setBack();
+        new TitleBar().bind(this).setTitle(Html.fromHtml(title).toString()).enableBack();
     }
 
     @Override

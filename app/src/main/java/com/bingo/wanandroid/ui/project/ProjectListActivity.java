@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListActivity;
 import com.frame.library.utils.ToastUtil;
+import com.frame.library.widget.TitleBar;
 
 
 public class ProjectListActivity extends BaseListActivity<Project.DatasBean, ProjectViewModel> {
@@ -34,6 +35,11 @@ public class ProjectListActivity extends BaseListActivity<Project.DatasBean, Pro
             finish();
             ToastUtil.showToast("参数错误");
         }
+    }
+
+    @Override
+    protected void setToolBar() {
+        new TitleBar().bind(this).setTitle(Html.fromHtml(tree.getName()).toString()).enableBack();
     }
 
     @Override

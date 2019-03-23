@@ -31,13 +31,10 @@ public class LastProjectFragment extends BaseListFragment<Project.DatasBean, Pro
 
     @Override
     protected void requestData() {
-        viewModel.getLastProject(pageIndex).observe(this, new Observer<Project>() {
-            @Override
-            public void onChanged(@Nullable Project project) {
-                if (project != null) {
-                    pageSize = project.getSize();
-                    setListData(project.getDatas());
-                }
+        viewModel.getLastProject(pageIndex).observe(this, project -> {
+            if (project != null) {
+                pageSize = project.getSize();
+                setListData(project.getDatas());
             }
         });
     }

@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListActivity;
 import com.frame.library.utils.ToastUtil;
+import com.frame.library.widget.TitleBar;
 
 public class ArticleListActivity extends BaseListActivity<Article.DatasBean, ArticleViewModel> {
     private WxArticle wxArticle;
@@ -34,10 +35,14 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
         }
     }
 
+    @Override
+    protected void setToolBar() {
+        new TitleBar().bind(this).setTitle(Html.fromHtml(wxArticle.getName()).toString()).enableBack();
+    }
 
     @Override
     protected void onItemClick(Article.DatasBean item) {
-        DetailActivity.start(context, item.getLink(),item.getTitle());
+        DetailActivity.start(context, item.getLink(), item.getTitle());
     }
 
     @Override

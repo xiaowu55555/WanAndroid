@@ -35,16 +35,8 @@ public class TitleBar {
         return this;
     }
 
-    public TitleBar bind(Context context, View rootView) {
-        LinearLayout parentLinearLayout = new LinearLayout(context);
-        parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
-        inflateView = LayoutInflater.from(context).inflate(R.layout.inc_title_bar, parentLinearLayout, true);
-        ViewGroup parent = (ViewGroup) rootView.getParent();
-        if (parent != null) {
-            parent.removeAllViews();
-            parentLinearLayout.addView(rootView);
-            parent.addView(parentLinearLayout);
-        }
+    public TitleBar bind(Context context, ViewGroup rootView) {
+        inflateView = LayoutInflater.from(context).inflate(R.layout.inc_title_bar, rootView, true);
         return this;
     }
 
@@ -58,7 +50,7 @@ public class TitleBar {
     }
 
     //默认左侧返回箭头,点击关掉当前页面
-    public TitleBar setBack() {
+    public TitleBar enableBack() {
         if (inflateView != null) {
             Toolbar toolBar = inflateView.findViewById(R.id.tool_bar);
             toolBar.setNavigationIcon(R.drawable.ic_arrow_back);

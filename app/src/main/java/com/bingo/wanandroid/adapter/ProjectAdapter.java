@@ -1,6 +1,7 @@
 package com.bingo.wanandroid.adapter;
 
 import android.text.Html;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,5 +24,8 @@ public class ProjectAdapter extends BaseQuickAdapter<Project.DatasBean, BaseView
         helper.setText(R.id.tv_des, Html.fromHtml(item.getDesc()));
         ImageView iv_cover = helper.getView(R.id.iv_cover);
         Glide.with(mContext).load(item.getEnvelopePic()).placeholder(R.color.color_app_divider).into(iv_cover);
+
+        helper.getView(R.id.tv_top).setVisibility(item.getType() == 1 ? View.VISIBLE : View.GONE);
+        helper.getView(R.id.tv_refresh).setVisibility(item.isFresh() ? View.VISIBLE : View.GONE);
     }
 }

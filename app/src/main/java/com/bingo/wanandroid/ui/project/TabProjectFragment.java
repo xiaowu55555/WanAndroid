@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bingo.wanandroid.R;
@@ -12,6 +13,7 @@ import com.bingo.wanandroid.entity.ProjectTree;
 import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.frame.library.base.BaseFragment;
 import com.frame.library.widget.MultipleStatusView;
+import com.frame.library.widget.TitleBar;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -35,9 +37,12 @@ public class TabProjectFragment extends BaseFragment<ProjectViewModel> {
     }
 
     @Override
+    protected void setToolBar(LinearLayout rootView) {
+        new TitleBar().bind(context,rootView).setTitle("项目分类");
+    }
+
+    @Override
     protected void initView(View rootView) {
-        TextView tvTitle = rootView.findViewById(R.id.tv_title);
-        tvTitle.setText("项目分类");
         TagFlowLayout flowLayout = rootView.findViewById(R.id.flow_layout);
         adapter = new TagAdapter<ProjectTree>(treeList) {
             @Override
