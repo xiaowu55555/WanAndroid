@@ -34,7 +34,7 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
 
     @Override
     protected void setToolBar(LinearLayout rootView) {
-        new TitleBar().bind(context, rootView).setTitle("公众号列表");
+        new TitleBar().bind(context, rootView).setTitle("公众号列表").fitStatusBar();
 
     }
 

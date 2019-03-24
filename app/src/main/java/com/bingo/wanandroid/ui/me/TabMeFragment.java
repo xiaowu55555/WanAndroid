@@ -6,6 +6,8 @@ import com.bingo.wanandroid.R;
 import com.frame.library.base.BaseFragment;
 import com.frame.library.base.BaseViewModel;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class TabMeFragment extends BaseFragment {
 
     public static TabMeFragment newInstance() {
@@ -19,7 +21,6 @@ public class TabMeFragment extends BaseFragment {
 
     @Override
     protected void initView(View rootView) {
-
     }
 
     @Override

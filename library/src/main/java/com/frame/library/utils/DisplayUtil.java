@@ -1,9 +1,14 @@
 package com.frame.library.utils;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+
+import com.frame.library.Library;
+
+import java.lang.reflect.Field;
 
 public class DisplayUtil {
     /**
@@ -57,6 +62,15 @@ public class DisplayUtil {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = Library.getInstance().getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = Library.getInstance().getContext().getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 
 }

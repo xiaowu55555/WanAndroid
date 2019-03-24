@@ -16,6 +16,8 @@ import com.frame.library.utils.FragmentSwitchManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class MainActivity extends BaseActivity {
 
     private List<Fragment> fragments = new ArrayList<>();
@@ -33,7 +35,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-
+        StatusBarCompat.translucentStatusBar(this);
         BottomNavigationView navigation = findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
         fragments.add(TabWxArticleFragment.newInstance());

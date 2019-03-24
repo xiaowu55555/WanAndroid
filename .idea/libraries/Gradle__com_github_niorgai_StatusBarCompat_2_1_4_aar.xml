@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.niorgai:StatusBarCompat:2.1.4@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/StatusBarCompat-2.1.4.aar/222453ef056c973c695ed22553f4180d/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/StatusBarCompat-2.1.4.aar/222453ef056c973c695ed22553f4180d/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.niorgai/StatusBarCompat/2.1.4/f04aedd2d34d648b2c2ee921802f2ca6bac838d/StatusBarCompat-2.1.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

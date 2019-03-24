@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.frame.library.R;
+import com.frame.library.utils.DisplayUtil;
 
 public class TitleBar {
 
@@ -85,5 +87,14 @@ public class TitleBar {
             toolBar.setOnMenuItemClickListener(listener);
         }
         return this;
+    }
+
+    //适配状态栏
+    public void fitStatusBar() {
+        if (inflateView != null) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) inflateView.getLayoutParams();
+            layoutParams.setMargins(0,-DisplayUtil.getStatusBarHeight(),0,0);
+            inflateView.setLayoutParams(layoutParams);
+        }
     }
 }

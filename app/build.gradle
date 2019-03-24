@@ -35,4 +35,9 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    implementation "com.orhanobut:hawk:2.0.1"
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 }
