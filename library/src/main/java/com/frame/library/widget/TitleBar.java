@@ -92,9 +92,10 @@ public class TitleBar {
     //适配状态栏
     public void fitStatusBar() {
         if (inflateView != null) {
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) inflateView.getLayoutParams();
-            layoutParams.setMargins(0,-DisplayUtil.getStatusBarHeight(),0,0);
-            inflateView.setLayoutParams(layoutParams);
+            View status_view = inflateView.findViewById(R.id.status_view);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) status_view.getLayoutParams();
+            params.height = DisplayUtil.getStatusBarHeight();
+            status_view.setLayoutParams(params);
         }
     }
 }
