@@ -7,23 +7,20 @@ import com.frame.library.Library;
 
 public class App extends Application {
 
-    private ApiService apiService;
     private static App instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        apiService = Library.getInstance().init(this)
-                .setBaseUrl(ApiService.BASE_URL)
-                .setApiClass(ApiService.class);
-    }
-
-    public ApiService getApi() {
-        return apiService;
+        Library.getInstance().init(this);
     }
 
     public static App getInstance() {
         return instance;
+    }
+
+    public boolean isLogin() {
+        return false;
     }
 }
