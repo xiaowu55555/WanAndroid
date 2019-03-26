@@ -1,7 +1,5 @@
 package com.bingo.wanandroid.ui;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -36,7 +34,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        BottomNavigationView navigation = findViewById(R.id.bottm_view);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
         fragments.add(TabWxArticleFragment.newInstance());
         fragments.add(TabProjectFragment.newInstance());
@@ -69,7 +67,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public boolean supportSlideBack() {
+    protected boolean enableSwipeBack() {
         return false;
     }
 }

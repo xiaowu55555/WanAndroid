@@ -5,9 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-
-import com.aitangba.swipeback.SwipeBackActivity;
 import com.frame.library.Library;
 import com.frame.library.R;
 import com.frame.library.event.ActionEvent;
@@ -15,6 +12,9 @@ import com.frame.library.utils.NetworkUtils;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
+
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener {
     protected Context context;
@@ -35,8 +35,10 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
         observeActionEvent();
         getIntentData();
         setContentView(getLayoutRes());
+        setSwipeBackEnable(enableSwipeBack());
+        getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         setToolBar();
-        statusView = findViewById(R.id.stateful_layout);
+        statusView = (MultipleStatusView) findViewById(R.id.stateful_layout);
         if (statusView != null) {
             statusView.showLoading();
             statusView.setOnRetryClickListener(v -> {
@@ -44,13 +46,17 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
                 onRetry();
             });
         }
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         if (enableRefresh() && swipeRefreshLayout != null) {
             swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
             swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
             swipeRefreshLayout.setOnRefreshListener(this);
         }
         initView(savedInstanceState);
+    }
+
+    protected boolean enableSwipeBack() {
+        return true;
     }
 
     protected void setToolBar() {

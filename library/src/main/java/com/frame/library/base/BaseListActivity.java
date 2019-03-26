@@ -29,8 +29,8 @@ public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseA
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        recyclerView = findViewById(R.id.recyclerView);
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(getLayoutManager());
         adapter = getAdapter();
         recyclerView.setAdapter(adapter);

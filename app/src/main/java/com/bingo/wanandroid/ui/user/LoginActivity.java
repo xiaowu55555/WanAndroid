@@ -43,8 +43,8 @@ public class LoginActivity extends BaseActivity<UserViewModel> implements View.O
     protected void initView(Bundle savedInstanceState) {
         findViewById(R.id.tv_register).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
-        tv_user_name = findViewById(R.id.tv_user_name);
-        tv_pwd = findViewById(R.id.tv_pwd);
+        tv_user_name = (EditText) findViewById(R.id.tv_user_name);
+        tv_pwd = (EditText) findViewById(R.id.tv_pwd);
 
     }
 

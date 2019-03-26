@@ -52,5 +52,5 @@ dependencies {
     api 'com.just.agentweb:agentweb:4.0.2'
     //autosize
     api 'me.jessyan:autosize:1.1.2'
-    api 'com.aitangba:swipeback:1.0.3'
+    api 'me.imid.swipebacklayout.lib:library:1.1.0'
 }

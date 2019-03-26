@@ -47,7 +47,7 @@ public class DetailActivity extends WebViewActivity {
 
     @Override
     protected ViewGroup getWebContentView() {
-        return findViewById(R.id.fl_content);
+        return (ViewGroup) findViewById(R.id.fl_content);
     }
 
     @Override

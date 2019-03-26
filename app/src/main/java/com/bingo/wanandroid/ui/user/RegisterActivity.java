@@ -39,9 +39,9 @@ public class RegisterActivity extends BaseActivity<UserViewModel> {
     @Override
     protected void initView(Bundle savedInstanceState) {
         findViewById(R.id.btn_register).setOnClickListener(v -> regist());
-        tv_user_name = findViewById(R.id.tv_user_name);
-        tv_pwd = findViewById(R.id.tv_pwd);
-        tv_re_pwd = findViewById(R.id.tv_re_pwd);
+        tv_user_name = (EditText) findViewById(R.id.tv_user_name);
+        tv_pwd = (EditText) findViewById(R.id.tv_pwd);
+        tv_re_pwd = (EditText) findViewById(R.id.tv_re_pwd);
     }
 
     private void regist() {
