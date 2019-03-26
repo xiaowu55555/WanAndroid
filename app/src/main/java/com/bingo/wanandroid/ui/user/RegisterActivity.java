@@ -1,18 +1,13 @@
 package com.bingo.wanandroid.ui.user;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.bingo.wanandroid.R;
-import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.BaseActivity;
 import com.frame.library.utils.ToastUtil;

@@ -88,6 +88,7 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     private void observeActionEvent() {
         if (viewModel != null) {
             viewModel.getAction().observe(this, actionEvent -> {
+                XPopup.get(context).dismiss();
                 showContent();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:

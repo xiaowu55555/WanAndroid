@@ -90,6 +90,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         if (viewModel != null) {
             viewModel.getAction().observe(this, actionEvent -> {
                 showContent();
+                XPopup.get(context).dismiss();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:
                         showLoading(actionEvent.getMessage());

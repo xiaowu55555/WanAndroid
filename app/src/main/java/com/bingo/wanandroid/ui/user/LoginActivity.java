@@ -55,8 +55,7 @@ public class LoginActivity extends BaseActivity<UserViewModel> implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_register:
-                Intent intent = new Intent(context, RegisterActivity.class);
-                startActivityForResult(intent, 100);
+                startActivityForResult(new Intent(context, RegisterActivity.class), 100);
                 break;
             case R.id.btn_login:
                 login();
@@ -75,19 +74,16 @@ public class LoginActivity extends BaseActivity<UserViewModel> implements View.O
             ToastUtil.showToast("请输入密码");
             return;
         }
-        viewModel.login(userName, pwd).observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                ToastUtil.showToast("登录成功");
-                finish();
-            }
+        viewModel.login(userName, pwd).observe(this, user -> {
+            ToastUtil.showToast("登录成功");
+            finish();
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 100) {
+        if (requestCode == 100) {
             finish();
         }
     }

@@ -16,7 +16,7 @@ import com.lxj.xpopup.XPopup;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class TabMeFragment extends BaseFragment implements View.OnClickListener {
+public class TabMeFragment extends BaseFragment<UserViewModel> implements View.OnClickListener {
 
     private CircleImageView iv_avatar;
     private TextView tv_user_name;
@@ -50,9 +50,9 @@ public class TabMeFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void logout() {
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userViewModel.logout().observe(this, s -> {
-            intiUser();
+        viewModel.logout().observe(this, s -> {
+            tv_user_name.setText("点击头像登录");
+            iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avatar));
         });
     }
 
@@ -74,8 +74,8 @@ public class TabMeFragment extends BaseFragment implements View.OnClickListener 
     }
 
     @Override
-    protected BaseViewModel createViewModel() {
-        return null;
+    protected UserViewModel createViewModel() {
+        return ViewModelProviders.of(this).get(UserViewModel.class);
     }
 
     @Override
