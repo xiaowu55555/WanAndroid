@@ -54,4 +54,8 @@ dependencies {
     api 'com.lxj:xpopup:1.5.0'
     //autosize
     api 'me.jessyan:autosize:1.1.2'
+
+    api ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
 }

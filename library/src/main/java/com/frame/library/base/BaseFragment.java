@@ -91,7 +91,7 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
                 showContent();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:
-                        showLoading();
+                        showLoading(actionEvent.getMessage());
                         break;
                     case ActionEvent.HIDE_LOADING:
                         hideLoading();
@@ -111,9 +111,9 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
         XPopup.get(context).dismiss();
     }
 
-    protected void showLoading() {
+    protected void showLoading(String message) {
         XPopup.get(context)
-                .asCustom(new LoadingPopView(context))
+                .asCustom(new LoadingPopView(context).setTitle(message))
                 .dismissOnTouchOutside(false)
                 .show();
     }

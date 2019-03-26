@@ -43,26 +43,34 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:gravity="end"
-        android:padding="16dp"
-        android:text="没有账号,去注册"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btn_login"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:passwordToggleEnabled="true">
+
+        <AutoCompleteTextView
+            android:id="@+id/tv_re_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请再次输入密码"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/color_212121" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:elevation="10dp"
         android:padding="16dp"
-        android:text="登录"
+        android:text="注册"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/colorPrimary" />

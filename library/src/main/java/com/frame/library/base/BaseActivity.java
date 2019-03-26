@@ -21,6 +21,8 @@ import com.frame.library.widget.LoadingPopView;
 import com.frame.library.widget.MultipleStatusView;
 import com.lxj.xpopup.XPopup;
 
+import qiu.niorgai.StatusBarCompat;
+
 public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     protected Context context;
     protected T viewModel;
@@ -39,6 +41,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         observeActionEvent();
         getIntentData();
         setContentView(getLayoutRes());
+        setStatusBar();
         setToolBar();
         statusView = findViewById(R.id.stateful_layout);
         if (statusView != null) {
@@ -57,24 +60,13 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         initView(savedInstanceState);
     }
 
+    protected void setStatusBar() {
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
+    }
+
     protected void setToolBar() {
 
     }
-
-//    @Override
-//    public void setContentView(int layoutResID) {
-//        if (getPageType() == PAGE_TYPE_TOOLBAR) {
-//            ViewGroup viewGroup = (ViewGroup) findViewById(android.R.id.content);
-//            viewGroup.removeAllViews();
-//            LinearLayout parentLinearLayout = new LinearLayout(this);
-//            parentLinearLayout.setOrientation(LinearLayout.VERTICAL);
-//            viewGroup.addView(parentLinearLayout);
-//            LayoutInflater.from(this).inflate(R.layout.inc_title_bar, parentLinearLayout, true);
-//            LayoutInflater.from(this).inflate(layoutResID, parentLinearLayout, true);
-//        } else {
-//            super.setContentView(layoutResID);
-//        }
-//    }
 
     protected void getIntentData() {
 
@@ -100,7 +92,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
                 showContent();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:
-                        showLoading();
+                        showLoading(actionEvent.getMessage());
                         break;
                     case ActionEvent.HIDE_LOADING:
                         hideLoading();
@@ -120,9 +112,9 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         XPopup.get(context).dismiss();
     }
 
-    protected void showLoading() {
+    protected void showLoading(String message) {
         XPopup.get(context)
-                .asCustom(new LoadingPopView(context))
+                .asCustom(new LoadingPopView(context).setTitle(message))
                 .dismissOnTouchOutside(false)
                 .show();
     }

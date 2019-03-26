@@ -15,7 +15,6 @@ import com.frame.library.base.BaseActivity;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.utils.FragmentSwitchManager;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +36,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView(Bundle savedInstanceState) {
+    protected void setStatusBar() {
         StatusBarCompat.translucentStatusBar(this,true);
+    }
+
+    @Override
+    protected void initView(Bundle savedInstanceState) {
         BottomNavigationView navigation = findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
         fragments.add(TabWxArticleFragment.newInstance());

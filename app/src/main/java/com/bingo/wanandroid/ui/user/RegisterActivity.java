@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.entity.User;
@@ -17,56 +18,39 @@ import com.frame.library.base.BaseActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
-public class LoginActivity extends BaseActivity<UserViewModel> implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity<UserViewModel> {
 
     private EditText tv_user_name;
     private EditText tv_pwd;
+    private EditText tv_re_pwd;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, LoginActivity.class);
+        Intent starter = new Intent(context, RegisterActivity.class);
         context.startActivity(starter);
     }
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.activity_login;
+        return R.layout.activity_register;
     }
 
     @Override
     protected void setToolBar() {
-        new TitleBar().bind(this).setTitle("登录").enableBack();
+        new TitleBar().bind(this).setTitle("注册").enableBack();
     }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        findViewById(R.id.tv_register).setOnClickListener(this);
-        findViewById(R.id.btn_login).setOnClickListener(this);
+        findViewById(R.id.btn_register).setOnClickListener(v -> regist());
         tv_user_name = findViewById(R.id.tv_user_name);
         tv_pwd = findViewById(R.id.tv_pwd);
-
+        tv_re_pwd = findViewById(R.id.tv_re_pwd);
     }
 
-    @Override
-    protected UserViewModel createViewModel() {
-        return ViewModelProviders.of(this).get(UserViewModel.class);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_register:
-                Intent intent = new Intent(context, RegisterActivity.class);
-                startActivityForResult(intent, 100);
-                break;
-            case R.id.btn_login:
-                login();
-                break;
-        }
-    }
-
-    private void login() {
+    private void regist() {
         String userName = tv_user_name.getText().toString().trim();
         String pwd = tv_pwd.getText().toString().trim();
+        String rePwd = tv_re_pwd.getText().toString().trim();
         if (TextUtils.isEmpty(userName)) {
             ToastUtil.showToast("请输入用户名");
             return;
@@ -75,20 +59,24 @@ public class LoginActivity extends BaseActivity<UserViewModel> implements View.O
             ToastUtil.showToast("请输入密码");
             return;
         }
-        viewModel.login(userName, pwd).observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                ToastUtil.showToast("登录成功");
-                finish();
-            }
+        if (TextUtils.isEmpty(rePwd)) {
+            ToastUtil.showToast("请再次输入密码");
+            return;
+        }
+        if (!pwd.equals(rePwd)) {
+            ToastUtil.showToast("两次密码输入不一致");
+            return;
+        }
+
+        viewModel.register(userName, pwd, rePwd).observe(this, user -> {
+            ToastUtil.showToast("注册成功");
+            setResult(RESULT_OK);
+            finish();
         });
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 100) {
-            finish();
-        }
+    protected UserViewModel createViewModel() {
+        return ViewModelProviders.of(this).get(UserViewModel.class);
     }
 }

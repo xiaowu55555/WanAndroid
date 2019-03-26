@@ -31,4 +31,14 @@ public class App extends Application {
     public boolean isLogin() {
         return Hawk.get("login_user") != null;
     }
+
+    public void setUser(User user) {
+        if (user != null) {
+            Hawk.put("login_user", user);
+        }
+    }
+
+    public void logout(){
+        Hawk.delete("login_user");
+    }
 }

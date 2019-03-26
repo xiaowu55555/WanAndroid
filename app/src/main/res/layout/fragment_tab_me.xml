@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
+                android:id="@+id/iv_avatar"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="40dp"
@@ -28,6 +28,7 @@
                 app:civ_border_width="2dp" />
 
             <TextView
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -76,6 +77,7 @@
 
 
         <com.frame.library.widget.LSettingItem
+            android:id="@+id/ls_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:isShowUnderLine="false"

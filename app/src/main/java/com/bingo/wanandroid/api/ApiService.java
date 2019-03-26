@@ -4,12 +4,16 @@ import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.HomeBanner;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.ProjectTree;
+import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.entity.WxArticle;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -48,5 +52,19 @@ public interface ApiService {
     //项目列表数据
     @GET("project/list/{pageIndex}/json")
     Observable<HttpResult<Project>> getProjectList(@Path("pageIndex") int pageIndex, @Query("cid") long cid);
+
+    //注册
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<HttpResult<User>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+
+    //登录
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<HttpResult<User>> login(@Field("username") String username, @Field("password") String password);
+
+    //退出登录
+    @GET("user/logout/json")
+    Observable<HttpResult<String>> logout();
 
 }
