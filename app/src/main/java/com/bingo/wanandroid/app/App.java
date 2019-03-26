@@ -1,6 +1,8 @@
 package com.bingo.wanandroid.app;
 
 import android.app.Application;
+import android.support.v7.app.AppCompatDelegate;
+
 import com.bingo.wanandroid.entity.User;
 import com.frame.library.Library;
 import com.orhanobut.hawk.Hawk;
@@ -15,6 +17,7 @@ public class App extends Application {
         instance = this;
         Library.getInstance().init(this);
         Hawk.init(instance).build();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     public static App getInstance() {
