@@ -59,7 +59,7 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
         User user = App.getInstance().getUser();
         if (user != null) {
             tv_user_name.setText(user.getUsername());
-            iv_avatar.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+            iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avadar_login));
         } else {
             tv_user_name.setText("点击头像登录");
             iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avatar));
@@ -90,7 +90,7 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
     @Subscribe
     public void notifyLogin(User user){
         tv_user_name.setText(user.getUsername());
-        iv_avatar.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+        iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avadar_login));
     }
 
     @Override
