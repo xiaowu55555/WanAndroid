@@ -2,7 +2,10 @@ package com.bingo.wanandroid.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.bingo.wanandroid.R;
@@ -32,7 +35,14 @@ public class DetailActivity extends WebViewActivity {
 
     @Override
     protected void setToolBar() {
-        new TitleBar().bind(this).setTitle(Html.fromHtml(title).toString()).enableBack();
+        MenuItem menuItem = new TitleBar().bind(this).setTitle(Html.fromHtml(title).toString()).enableBack()
+                .setMenu(R.menu.menu_detail, new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        return false;
+                    }
+                }).getMenuItem(0);
+        menuItem.setIcon(R.drawable.ic_favorite_black_24dp);
     }
 
     @Override

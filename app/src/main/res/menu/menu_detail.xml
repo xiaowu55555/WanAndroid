@@ -5,6 +5,16 @@
     <item
         android:id="@+id/action_like"
         android:icon="@drawable/ic_favorite_normal_24dp"
-        android:title="分享"
+        android:title="收藏"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_favorite_normal_24dp"
+        android:title="分享"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_browser"
+        android:icon="@drawable/ic_favorite_normal_24dp"
+        android:title="浏览器打开"
+        app:showAsAction="never" />
 </menu>

@@ -96,7 +96,16 @@ public class TitleBar {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toolBar.getLayoutParams();
             params.height = params.height + DisplayUtil.getStatusBarHeight();
             toolBar.setLayoutParams(params);
-            toolBar.setPadding(0,DisplayUtil.getStatusBarHeight(),0,0);
+            toolBar.setPadding(0, DisplayUtil.getStatusBarHeight(), 0, 0);
         }
+    }
+
+    public MenuItem getMenuItem(int index) {
+        if (inflateView != null) {
+            Toolbar toolBar = inflateView.findViewById(R.id.tool_bar);
+            MenuItem item = toolBar.getMenu().getItem(index);
+            return item;
+        }
+        return null;
     }
 }
