@@ -3,6 +3,7 @@ package com.bingo.wanandroid.app;
 import android.app.Application;
 import android.widget.Button;
 
+import com.aitangba.swipeback.ActivityLifecycleHelper;
 import com.bingo.wanandroid.entity.User;
 import com.frame.library.Library;
 import com.orhanobut.hawk.Hawk;
@@ -17,6 +18,7 @@ public class App extends Application {
         instance = this;
         Library.getInstance().init(this);
         Hawk.init(instance).build();
+        registerActivityLifecycleCallbacks(ActivityLifecycleHelper.build());
     }
 
     public static App getInstance() {

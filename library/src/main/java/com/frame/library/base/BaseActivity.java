@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 
+import com.aitangba.swipeback.SwipeBackActivity;
 import com.frame.library.Library;
 import com.frame.library.R;
 import com.frame.library.event.ActionEvent;
@@ -15,7 +16,7 @@ import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
 
-public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener {
     protected Context context;
     protected T viewModel;
     protected MultipleStatusView statusView;

@@ -67,4 +67,9 @@ public class MainActivity extends BaseActivity {
     protected BaseViewModel createViewModel() {
         return null;
     }
+
+    @Override
+    public boolean supportSlideBack() {
+        return false;
+    }
 }
