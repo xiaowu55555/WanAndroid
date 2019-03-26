@@ -17,6 +17,8 @@ import com.frame.library.base.BaseListActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ArticleListActivity extends BaseListActivity<Article.DatasBean, ArticleViewModel> {
     private WxArticle wxArticle;
 

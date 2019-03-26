@@ -1,5 +1,7 @@
 package com.bingo.wanandroid.ui;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import com.frame.library.base.BaseActivity;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.utils.FragmentSwitchManager;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +38,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        StatusBarCompat.translucentStatusBar(this);
+        StatusBarCompat.translucentStatusBar(this,true);
         BottomNavigationView navigation = findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
         fragments.add(TabWxArticleFragment.newInstance());
