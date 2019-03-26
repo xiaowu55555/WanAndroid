@@ -1,6 +1,7 @@
 package com.bingo.wanandroid.ui.me;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.TextView;
 
@@ -45,6 +46,17 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
                 DialogHelp.getConfirmDialog(context, "退出当前账号?",
                         (dialog, which) -> logout(),
                         (dialog, which) -> dialog.dismiss()).create().show();
+            }
+        });
+        LSettingItem ls_night = rootView.findViewById(R.id.ls_night);
+        ls_night.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+            @Override
+            public void click(boolean isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                getActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+                getActivity().recreate();
+
             }
         });
     }

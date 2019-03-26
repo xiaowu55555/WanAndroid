@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
     <FrameLayout
@@ -16,9 +16,10 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottm_view"
+        style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/viewBackground"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconTint="@drawable/bottom_navigation_item_selector"
         app:itemTextColor="@drawable/bottom_navigation_item_selector"

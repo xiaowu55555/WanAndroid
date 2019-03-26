@@ -17,7 +17,7 @@ public class App extends Application {
         instance = this;
         Library.getInstance().init(this);
         Hawk.init(instance).build();
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public static App getInstance() {
