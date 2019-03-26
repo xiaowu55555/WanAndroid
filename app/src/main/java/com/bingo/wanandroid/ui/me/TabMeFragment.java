@@ -12,7 +12,6 @@ import com.bingo.wanandroid.ui.user.LoginActivity;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.BaseFragment;
 import com.frame.library.widget.DialogHelp;
-import com.frame.library.widget.LSettingItem;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,25 +39,12 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
         iv_avatar.setOnClickListener(this);
         tv_user_name = rootView.findViewById(R.id.tv_user_name);
         intiUser();
-        LSettingItem ls_logout = rootView.findViewById(R.id.ls_logout);
-        ls_logout.setmOnLSettingItemClick(isChecked -> {
-            if (App.getInstance().isLogin()) {
-                DialogHelp.getConfirmDialog(context, "退出当前账号?",
-                        (dialog, which) -> logout(),
-                        (dialog, which) -> dialog.dismiss()).create().show();
-            }
-        });
-        LSettingItem ls_night = rootView.findViewById(R.id.ls_night);
-        ls_night.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
-            @Override
-            public void click(boolean isChecked) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                getActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
-                getActivity().recreate();
-
-            }
-        });
+        rootView.findViewById(R.id.tv_collect).setOnClickListener(this);
+        rootView.findViewById(R.id.tv_todo).setOnClickListener(this);
+        rootView.findViewById(R.id.tv_night).setOnClickListener(this);
+        rootView.findViewById(R.id.tv_clear).setOnClickListener(this);
+        rootView.findViewById(R.id.tv_about).setOnClickListener(this);
+        rootView.findViewById(R.id.tv_logout).setOnClickListener(this);
     }
 
     private void logout() {
@@ -96,11 +82,30 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
                     LoginActivity.start(context);
                 }
                 break;
+            case R.id.tv_collect:
+                break;
+            case R.id.tv_todo:
+                break;
+            case R.id.tv_night:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                getActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+                getActivity().recreate();
+                break;
+            case R.id.tv_clear:
+                break;
+            case R.id.tv_logout:
+                if (App.getInstance().isLogin()) {
+                    DialogHelp.getConfirmDialog(context, "退出当前账号?",
+                            (dialog, which) -> logout(),
+                            (dialog, which) -> dialog.dismiss()).create().show();
+                }
+                break;
         }
     }
 
     @Subscribe
-    public void notifyLogin(User user){
+    public void notifyLogin(User user) {
         tv_user_name.setText(user.getUsername());
         iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avadar_login));
     }

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/bg_gray">
+    android:background="@color/viewBackground"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,15 +13,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:background="@drawable/bg_banner"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_avatar"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="40dp"
                 android:src="@drawable/ic_avatar"
                 app:civ_border_color="@color/white"
@@ -32,59 +32,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textStyle="bold"
                 android:text="点击头像登录"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </LinearLayout>
 
-        <com.frame.library.widget.LSettingItem
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            app:leftIcon="@drawable/ic_collect"
-            app:leftText="我的收藏"
-            app:rightIcon="@drawable/ic_arrow_right" />
-
-        <com.frame.library.widget.LSettingItem
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            app:leftIcon="@drawable/ic_todo"
-            app:leftText="TODO"
-            app:rightIcon="@drawable/ic_arrow_right" />
-
-        <com.frame.library.widget.LSettingItem
-            android:id="@+id/ls_night"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:leftIcon="@drawable/ic_night"
-            app:leftText="夜间模式"
-            app:rightStyle="iconSwitch" />
+            android:divider="@drawable/bg_divider"
+            android:orientation="vertical"
+            android:showDividers="middle">
 
-        <com.frame.library.widget.LSettingItem
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            app:isShowUnderLine="false"
-            app:leftIcon="@drawable/ic_clear"
-            app:leftText="清除缓存" />
+            <TextView
+                android:id="@+id/tv_collect"
+                style="@style/style_item_setting"
+                android:drawableStart="@drawable/ic_collect"
+                android:text="我的收藏" />
 
+            <TextView
+                android:id="@+id/tv_todo"
+                style="@style/style_item_setting"
+                android:drawableStart="@drawable/ic_todo"
+                android:text="TODO" />
 
-        <com.frame.library.widget.LSettingItem
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginTop="8dp"
-            app:leftIcon="@drawable/ic_about"
-            app:leftText="关于我们"
-            app:rightIcon="@drawable/ic_arrow_right" />
+            <TextView
+                android:id="@+id/tv_night"
+                style="@style/style_item_setting"
+                android:drawableStart="@drawable/ic_night"
+                android:text="夜间模式" />
 
+            <TextView
+                android:id="@+id/tv_clear"
+                style="@style/style_item_setting"
+                android:drawableStart="@drawable/ic_clear"
+                android:text="清除缓存" />
 
-        <com.frame.library.widget.LSettingItem
-            android:id="@+id/ls_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:isShowUnderLine="false"
-            app:leftIcon="@drawable/ic_logout"
-            app:leftText="退出登录"
-            app:rightStyle="iconHide" />
+            <TextView
+                android:id="@+id/tv_about"
+                style="@style/style_item_setting"
+                android:drawableStart="@drawable/ic_about"
+                android:text="关于我们" />
+
+            <TextView
+                android:id="@+id/tv_logout"
+                style="@style/style_item_setting"
+                android:drawableStart="@drawable/ic_logout"
+                android:text="退出登录" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
