@@ -45,7 +45,6 @@ public class TabHomeFragment extends BaseFragment<HomeViewModel> {
 
     @Override
     protected void initView(View rootView) {
-        setStatusView(rootView);
         mBanner = rootView.findViewById(R.id.banner);
         TabLayout mTabLayout = rootView.findViewById(R.id.tablayout);
         ViewPager mViewPager = rootView.findViewById(R.id.viewpager);
@@ -58,13 +57,6 @@ public class TabHomeFragment extends BaseFragment<HomeViewModel> {
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(0)));
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(1)));
         mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-    private void setStatusView(View rootView) {
-        View status_view = rootView.findViewById(R.id.status_view);
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) status_view.getLayoutParams();
-        lp.height = DisplayUtil.getStatusBarHeight();
-        status_view.setLayoutParams(lp);
     }
 
     @Override

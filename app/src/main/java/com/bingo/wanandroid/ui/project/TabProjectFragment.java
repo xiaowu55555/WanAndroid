@@ -38,7 +38,7 @@ public class TabProjectFragment extends BaseFragment<ProjectViewModel> {
 
     @Override
     protected void setToolBar(LinearLayout rootView) {
-        new TitleBar().bind(context,rootView).setTitle("项目分类").fitStatusBar();
+        new TitleBar().bind(context,rootView).setTitle("项目分类");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.frame.library.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,9 +17,8 @@ import com.frame.library.event.ActionEvent;
 import com.frame.library.Library;
 import com.frame.library.utils.NetworkUtils;
 import com.frame.library.utils.ToastUtil;
-import com.frame.library.widget.LoadingPopView;
+import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
-import com.lxj.xpopup.XPopup;
 
 public abstract class BaseFragment<T extends BaseViewModel> extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -29,6 +29,7 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     protected LinearLayout rootView;
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected MultipleStatusView statusView;
+    private ProgressDialog waitDialog;
 
     @Override
     public void onAttach(Context context) {
@@ -48,7 +49,7 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (rootView == null) {
 //            rootView = inflater.inflate(getLayoutRes(), container, false);
-            rootView  = new LinearLayout(context);
+            rootView = new LinearLayout(context);
             rootView.setOrientation(LinearLayout.VERTICAL);
             setToolBar(rootView);
             LayoutInflater.from(context).inflate(getLayoutRes(), rootView, true);
@@ -88,7 +89,6 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     private void observeActionEvent() {
         if (viewModel != null) {
             viewModel.getAction().observe(this, actionEvent -> {
-                XPopup.get(context).dismiss();
                 showContent();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:
@@ -109,14 +109,14 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     }
 
     protected void hideLoading() {
-        XPopup.get(context).dismiss();
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
     }
 
     protected void showLoading(String message) {
-        XPopup.get(context)
-                .asCustom(new LoadingPopView(context).setTitle(message))
-                .dismissOnTouchOutside(false)
-                .show();
+        waitDialog = DialogHelp.getWaitDialog(context, message);
+        waitDialog.show();
     }
 
     protected void showError(String message) {
@@ -155,12 +155,24 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment imp
     public void onRefresh() {
     }
 
-    protected void showContent(){
+    protected void showContent() {
         if (statusView != null && statusView.getViewStatus() == MultipleStatusView.STATUS_LOADING) {
             statusView.showContent();
         }
         if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
+
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
+        super.onDestroyView();
     }
 }

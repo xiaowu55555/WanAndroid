@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.bingo.wanandroid.api.HttpResult;
 import com.bingo.wanandroid.app.App;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.User;
@@ -11,6 +12,9 @@ import com.bingo.wanandroid.viewmodel.base.SupportViewModel;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.net.RxSubscriber;
 import com.frame.library.net.RxTransformer;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class UserViewModel extends SupportViewModel {
     public UserViewModel(@NonNull Application application) {
@@ -55,15 +59,15 @@ public class UserViewModel extends SupportViewModel {
         return data;
     }
 
-    public MutableLiveData<String> logout() {
-        MutableLiveData<String> data = new MutableLiveData<>();
+    public void logout() {
         apiService.logout()
-                .compose(RxTransformer.applySchedulers())
-                .subscribe(new RxSubscriber<String>(this) {
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
                     @Override
-                    public void onSuccess(String str) {
+                    public void onSuccess(HttpResult result) {
                         App.getInstance().logout();
-                        data.setValue(str);
                     }
 
                     @Override
@@ -71,6 +75,5 @@ public class UserViewModel extends SupportViewModel {
                         App.getInstance().logout();
                     }
                 });
-        return data;
     }
 }

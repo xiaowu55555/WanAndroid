@@ -1,27 +1,19 @@
 package com.frame.library.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.frame.library.Library;
 import com.frame.library.R;
 import com.frame.library.event.ActionEvent;
-import com.frame.library.Library;
 import com.frame.library.utils.NetworkUtils;
 import com.frame.library.utils.ToastUtil;
-import com.frame.library.widget.LoadingPopView;
+import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
-import com.lxj.xpopup.XPopup;
-
-import qiu.niorgai.StatusBarCompat;
 
 public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     protected Context context;
@@ -31,6 +23,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     protected static final int PAGE_TYPE_TOOLBAR = 0;
     protected static final int PAGE_TYPE_NO_TOOLBAR = 1;
     protected static final int PAGE_TYPE_FULL_SCREEN = 2;
+    private ProgressDialog waitDialog;
 
 
     @Override
@@ -41,7 +34,6 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         observeActionEvent();
         getIntentData();
         setContentView(getLayoutRes());
-        setStatusBar();
         setToolBar();
         statusView = findViewById(R.id.stateful_layout);
         if (statusView != null) {
@@ -58,10 +50,6 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
             swipeRefreshLayout.setOnRefreshListener(this);
         }
         initView(savedInstanceState);
-    }
-
-    protected void setStatusBar() {
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary));
     }
 
     protected void setToolBar() {
@@ -90,7 +78,6 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         if (viewModel != null) {
             viewModel.getAction().observe(this, actionEvent -> {
                 showContent();
-                XPopup.get(context).dismiss();
                 switch (actionEvent.getAction()) {
                     case ActionEvent.SHOW_LOADING:
                         showLoading(actionEvent.getMessage());
@@ -110,14 +97,14 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     }
 
     protected void hideLoading() {
-        XPopup.get(context).dismiss();
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
     }
 
     protected void showLoading(String message) {
-        XPopup.get(context)
-                .asCustom(new LoadingPopView(context).setTitle(message))
-                .dismissOnTouchOutside(false)
-                .show();
+        waitDialog = DialogHelp.getWaitDialog(context, message);
+        waitDialog.show();
     }
 
     protected void showError(String message) {
@@ -146,7 +133,16 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
+        super.onDestroy();
+    }
 }

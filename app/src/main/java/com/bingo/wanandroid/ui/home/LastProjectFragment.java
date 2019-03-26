@@ -1,8 +1,6 @@
 package com.bingo.wanandroid.ui.home;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.support.annotation.Nullable;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ProjectAdapter;

@@ -65,6 +65,6 @@ public interface ApiService {
 
     //退出登录
     @GET("user/logout/json")
-    Observable<HttpResult<String>> logout();
+    Observable<HttpResult> logout();
 
 }

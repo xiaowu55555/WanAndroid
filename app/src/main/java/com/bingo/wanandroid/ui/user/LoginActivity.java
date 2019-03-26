@@ -17,6 +17,8 @@ import com.frame.library.base.BaseActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class LoginActivity extends BaseActivity<UserViewModel> implements View.OnClickListener {
 
     private EditText tv_user_name;
@@ -75,6 +77,7 @@ public class LoginActivity extends BaseActivity<UserViewModel> implements View.O
             return;
         }
         viewModel.login(userName, pwd).observe(this, user -> {
+            EventBus.getDefault().post(user);
             ToastUtil.showToast("登录成功");
             finish();
         });

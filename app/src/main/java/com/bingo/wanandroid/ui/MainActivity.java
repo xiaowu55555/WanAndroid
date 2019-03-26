@@ -18,7 +18,6 @@ import com.frame.library.utils.FragmentSwitchManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import qiu.niorgai.StatusBarCompat;
 
 public class MainActivity extends BaseActivity {
 
@@ -33,11 +32,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int getPageType() {
         return PAGE_TYPE_NO_TOOLBAR;
-    }
-
-    @Override
-    protected void setStatusBar() {
-        StatusBarCompat.translucentStatusBar(this,true);
     }
 
     @Override

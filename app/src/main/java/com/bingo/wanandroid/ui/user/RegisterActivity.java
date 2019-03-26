@@ -13,6 +13,8 @@ import com.frame.library.base.BaseActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class RegisterActivity extends BaseActivity<UserViewModel> {
 
     private EditText tv_user_name;
@@ -64,6 +66,7 @@ public class RegisterActivity extends BaseActivity<UserViewModel> {
         }
 
         viewModel.register(userName, pwd, rePwd).observe(this, user -> {
+            EventBus.getDefault().post(user);
             ToastUtil.showToast("注册成功");
             setResult(RESULT_OK);
             finish();

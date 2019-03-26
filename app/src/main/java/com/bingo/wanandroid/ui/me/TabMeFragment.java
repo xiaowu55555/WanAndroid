@@ -10,9 +10,11 @@ import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.ui.user.LoginActivity;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.BaseFragment;
-import com.frame.library.base.BaseViewModel;
+import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.LSettingItem;
-import com.lxj.xpopup.XPopup;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,34 +34,25 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
 
     @Override
     protected void initView(View rootView) {
+        EventBus.getDefault().register(this);
         iv_avatar = rootView.findViewById(R.id.iv_avatar);
         iv_avatar.setOnClickListener(this);
         tv_user_name = rootView.findViewById(R.id.tv_user_name);
+        intiUser();
         LSettingItem ls_logout = rootView.findViewById(R.id.ls_logout);
         ls_logout.setmOnLSettingItemClick(isChecked -> {
-            User user = App.getInstance().getUser();
-            if (user != null) {
-                XPopup.get(context).asConfirm(
-                        "退出当前账号",
-                        null,
-                        this::logout,
-                        () -> XPopup.get(context).dismiss(),
-                        false).show();
+            if (App.getInstance().isLogin()) {
+                DialogHelp.getConfirmDialog(context, "退出当前账号?",
+                        (dialog, which) -> logout(),
+                        (dialog, which) -> dialog.dismiss()).create().show();
             }
         });
     }
 
     private void logout() {
-        viewModel.logout().observe(this, s -> {
-            tv_user_name.setText("点击头像登录");
-            iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avatar));
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        intiUser();
+        tv_user_name.setText("点击头像登录");
+        iv_avatar.setImageDrawable(getResources().getDrawable(R.drawable.ic_avatar));
+        viewModel.logout();
     }
 
     private void intiUser() {
@@ -92,5 +85,17 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
                 }
                 break;
         }
+    }
+
+    @Subscribe
+    public void notifyLogin(User user){
+        tv_user_name.setText(user.getUsername());
+        iv_avatar.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+    }
+
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
     }
 }
