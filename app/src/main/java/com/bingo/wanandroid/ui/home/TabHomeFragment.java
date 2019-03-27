@@ -89,7 +89,7 @@ public class TabHomeFragment extends BaseFragment<HomeViewModel> {
         mBanner.setOnBannerListener(position -> {
             HomeBanner banner = mBannerList.get(position);
             if (banner != null) {
-                DetailActivity.start(context, banner.getUrl(), banner.getTitle());
+                DetailActivity.start(context, banner.getUrl(), banner.getTitle(),false);
             }
         });
     }

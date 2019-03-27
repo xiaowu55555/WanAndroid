@@ -42,7 +42,7 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
 
     @Override
     protected void onItemClick(Article.DatasBean item) {
-        DetailActivity.start(context, item.getLink(), item.getTitle());
+        DetailActivity.start(context, item.getLink(), item.getTitle(),item.isCollect());
     }
 
     @Override

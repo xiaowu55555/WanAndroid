@@ -44,7 +44,7 @@ public class ProjectListActivity extends BaseListActivity<Project.DatasBean, Pro
 
     @Override
     protected void onItemClick(Project.DatasBean item) {
-        DetailActivity.start(context,item.getLink(),item.getTitle());
+        DetailActivity.start(context,item.getLink(),item.getTitle(),item.isCollect());
     }
 
 

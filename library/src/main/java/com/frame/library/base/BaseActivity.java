@@ -12,7 +12,6 @@ import com.frame.library.utils.NetworkUtils;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -31,6 +30,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        beforeInit();
         context = this;
         viewModel = createViewModel();
         observeActionEvent();
@@ -55,6 +55,8 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
         }
         initView(savedInstanceState);
     }
+
+    protected void beforeInit(){}
 
     protected boolean enableSwipeBack() {
         return true;

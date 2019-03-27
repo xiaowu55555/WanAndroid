@@ -21,6 +21,7 @@ public class MainActivity extends BaseActivity {
 
     private List<Fragment> fragments = new ArrayList<>();
     private FragmentSwitchManager switchManager;
+    private BottomNavigationView navigation;
 
     @Override
     protected int getLayoutRes() {
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottm_view);
+        navigation = (BottomNavigationView) findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
         fragments.add(TabWxArticleFragment.newInstance());
         fragments.add(TabProjectFragment.newInstance());
@@ -59,6 +60,10 @@ public class MainActivity extends BaseActivity {
             }
             return false;
         });
+    }
+
+    public void getSwitchManager() {
+        navigation.setSelectedItemId(R.id.navigation_home);
     }
 
     @Override

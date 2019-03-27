@@ -11,13 +11,12 @@ import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.app.App;
 import com.bingo.wanandroid.constant.Constant;
 import com.bingo.wanandroid.entity.User;
+import com.bingo.wanandroid.ui.MainActivity;
 import com.bingo.wanandroid.ui.user.LoginActivity;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.BaseFragment;
 import com.frame.library.utils.SPUtils;
 import com.frame.library.widget.DialogHelp;
-import com.orhanobut.hawk.Hawk;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -70,6 +69,7 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
             }
             getActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
             getActivity().recreate();
+            ((MainActivity)getActivity()).getSwitchManager();
         });
     }
 

@@ -15,10 +15,11 @@ import com.frame.library.widget.TitleBar;
 public class DetailActivity extends WebViewActivity {
     private String title;
 
-    public static void start(Context context, String url, String title) {
+    public static void start(Context context, String url, String title,boolean collect) {
         Intent starter = new Intent(context, DetailActivity.class);
         starter.putExtra("url", url);
         starter.putExtra("title", title);
+        starter.putExtra("collect", collect);
         context.startActivity(starter);
     }
 
