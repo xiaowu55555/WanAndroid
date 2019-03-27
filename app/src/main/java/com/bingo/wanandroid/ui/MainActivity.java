@@ -3,6 +3,7 @@ package com.bingo.wanandroid.ui;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.ui.article.TabWxArticleFragment;
@@ -12,6 +13,7 @@ import com.bingo.wanandroid.ui.project.TabProjectFragment;
 import com.frame.library.base.BaseActivity;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.utils.FragmentSwitchManager;
+import com.frame.library.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,5 +76,21 @@ public class MainActivity extends BaseActivity {
     @Override
     protected boolean enableSwipeBack() {
         return false;
+    }
+
+    private long mExitTime;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                ToastUtil.showToast("再按一次退出程序");
+                mExitTime = System.currentTimeMillis();
+            } else {
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
