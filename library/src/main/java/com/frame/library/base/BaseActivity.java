@@ -12,6 +12,7 @@ import com.frame.library.utils.NetworkUtils;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
