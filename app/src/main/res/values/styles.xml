@@ -17,10 +17,18 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+        <!--<item name="colorControlNormal">#00bcd4</item>-->
+        <!--<item name="colorControlActivated">#00bcd4</item>-->
+        <!--<item name="colorControlHighlight">#00bcd4</item>-->
+
+    </style>
+
+    <style name="EditScreenTextInputLayoutStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">#00bcd4</item>
         <item name="colorControlActivated">#00bcd4</item>
         <item name="colorControlHighlight">#00bcd4</item>
-
+        <item name="colorAccent">#00bcd4</item>
+        <item name="android:textColorHint">#00bcd4</item>
     </style>
 
 

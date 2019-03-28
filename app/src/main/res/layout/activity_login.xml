@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+        android:theme="@style/EditScreenTextInputLayoutStyle">
 
         <AutoCompleteTextView
             android:id="@+id/tv_user_name"
@@ -30,6 +31,7 @@
         android:layout_marginTop="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:theme="@style/EditScreenTextInputLayoutStyle"
         app:passwordToggleEnabled="true">
 
         <AutoCompleteTextView
@@ -44,18 +46,8 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:gravity="end"
-        android:padding="16dp"
-        android:text="没有账号,去注册"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="16sp" />
-
     <Button
+        android:layout_marginTop="16dp"
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,5 +59,16 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:text="没有账号,去注册"
+        android:textColor="@color/Cyan"
+        android:textSize="16sp" />
 
 </LinearLayout>

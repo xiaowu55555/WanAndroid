@@ -63,10 +63,10 @@ public class MainActivity extends BaseActivity {
     public void getSwitchManager() {
         navigation.setSelectedItemId(R.id.navigation_home);
         getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
-//        recreate();
-        startActivity(new Intent(context, MainActivity.class));
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finish();
+        recreate();
+//        startActivity(new Intent(context, MainActivity.class));
+//        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//        finish();
     }
 
     @Override
