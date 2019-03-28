@@ -79,17 +79,6 @@
                     android:layout_marginRight="8dp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_theme"
-                style="@style/style_item_setting"
-                android:drawableStart="@drawable/ic_night"
-                android:text="选择主题" />
-
-            <TextView
-                android:id="@+id/tv_clear"
-                style="@style/style_item_setting"
-                android:drawableStart="@drawable/ic_clear"
-                android:text="清除缓存" />
 
             <TextView
                 android:id="@+id/tv_about"

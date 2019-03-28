@@ -47,7 +47,6 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
         intiUser();
         rootView.findViewById(R.id.tv_collect).setOnClickListener(this);
         rootView.findViewById(R.id.tv_todo).setOnClickListener(this);
-        rootView.findViewById(R.id.tv_clear).setOnClickListener(this);
         rootView.findViewById(R.id.tv_about).setOnClickListener(this);
         rootView.findViewById(R.id.tv_logout).setOnClickListener(this);
         swNight = rootView.findViewById(R.id.sw_night);
@@ -109,8 +108,6 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
             case R.id.tv_collect:
                 break;
             case R.id.tv_todo:
-                break;
-            case R.id.tv_clear:
                 break;
             case R.id.tv_logout:
                 if (App.getInstance().isLogin()) {
