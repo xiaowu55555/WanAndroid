@@ -31,11 +31,6 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected int getPageType() {
-        return PAGE_TYPE_NO_TOOLBAR;
-    }
-
-    @Override
     protected void initView(Bundle savedInstanceState) {
         navigation = (BottomNavigationView) findViewById(R.id.bottm_view);
         fragments.add(TabHomeFragment.newInstance());
@@ -71,11 +66,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected BaseViewModel createViewModel() {
         return null;
-    }
-
-    @Override
-    protected boolean enableSwipeBack() {
-        return false;
     }
 
     private long mExitTime;

@@ -14,12 +14,13 @@ import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.BaseActivity;
+import com.frame.library.base.BaseSwipeBackActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class LoginActivity extends BaseActivity<UserViewModel> implements View.OnClickListener {
+public class LoginActivity extends BaseSwipeBackActivity<UserViewModel> implements View.OnClickListener {
 
     private EditText tv_user_name;
     private EditText tv_pwd;

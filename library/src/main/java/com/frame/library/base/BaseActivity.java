@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+
 import com.frame.library.Library;
 import com.frame.library.R;
 import com.frame.library.event.ActionEvent;
@@ -13,17 +15,11 @@ import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.DialogHelp;
 import com.frame.library.widget.MultipleStatusView;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
-public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackActivity implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     protected Context context;
     protected T viewModel;
     protected MultipleStatusView statusView;
     protected SwipeRefreshLayout swipeRefreshLayout;
-    protected static final int PAGE_TYPE_TOOLBAR = 0;
-    protected static final int PAGE_TYPE_NO_TOOLBAR = 1;
-    protected static final int PAGE_TYPE_FULL_SCREEN = 2;
     private ProgressDialog waitDialog;
 
 
@@ -36,8 +32,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
         observeActionEvent();
         getIntentData();
         setContentView(getLayoutRes());
-        setSwipeBackEnable(enableSwipeBack());
-        getSwipeBackLayout().setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        setSwipeBack();
         setToolBar();
         statusView = (MultipleStatusView) findViewById(R.id.stateful_layout);
         if (statusView != null) {
@@ -56,11 +51,11 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
         initView(savedInstanceState);
     }
 
-    protected void beforeInit(){}
+    protected void setSwipeBack() {
 
-    protected boolean enableSwipeBack() {
-        return true;
     }
+
+    protected void beforeInit(){}
 
     protected void setToolBar() {
 
@@ -72,10 +67,6 @@ public abstract class BaseActivity<T extends BaseViewModel> extends SwipeBackAct
 
     protected void onRetry() {
 
-    }
-
-    protected int getPageType() {
-        return PAGE_TYPE_TOOLBAR;//默认返回带toolbar
     }
 
     protected boolean enableRefresh() {

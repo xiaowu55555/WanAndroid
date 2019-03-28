@@ -24,11 +24,6 @@ public class DetailActivity extends WebViewActivity {
     }
 
     @Override
-    protected int getPageType() {
-        return PAGE_TYPE_TOOLBAR;
-    }
-
-    @Override
     protected void getIntentData() {
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");

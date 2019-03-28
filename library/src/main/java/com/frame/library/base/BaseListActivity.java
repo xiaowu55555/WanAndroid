@@ -19,7 +19,7 @@ import com.frame.library.widget.MultipleStatusView;
 import java.util.List;
 
 
-public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseActivity<T> implements
+public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseSwipeBackActivity<T> implements
         BaseQuickAdapter.RequestLoadMoreListener,
         SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemClickListener {
     protected RecyclerView recyclerView;

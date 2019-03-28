@@ -8,7 +8,9 @@ import android.widget.LinearLayout;
 import com.frame.library.R;
 import com.just.agentweb.AgentWeb;
 
-public abstract class WebViewActivity extends BaseActivity {
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
+public abstract class WebViewActivity extends BaseSwipeBackActivity {
     protected String url;
     private AgentWeb mAgentWeb;
 
