@@ -66,7 +66,7 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-            ((MainActivity)getActivity()).getSwitchManager();
+            ((MainActivity) getActivity()).getSwitchManager();
         });
     }
 
@@ -115,6 +115,9 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
                             (dialog, which) -> logout(),
                             (dialog, which) -> dialog.dismiss()).create().show();
                 }
+                break;
+            case R.id.tv_about:
+                AboutActivity.start(context);
                 break;
         }
     }

@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:hint="请输入用户名"
             android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/color_212121" />
+            android:textColor="@color/item_title"
+            android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -42,7 +42,7 @@
             android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="@color/color_212121" />
+            android:textColor="@color/item_title" />
 
     </android.support.design.widget.TextInputLayout>
 
