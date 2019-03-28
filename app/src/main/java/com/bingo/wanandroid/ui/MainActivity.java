@@ -1,5 +1,6 @@
 package com.bingo.wanandroid.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -61,6 +62,11 @@ public class MainActivity extends BaseActivity {
 
     public void getSwitchManager() {
         navigation.setSelectedItemId(R.id.navigation_home);
+        getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+//        recreate();
+        startActivity(new Intent(context, MainActivity.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
     }
 
     @Override

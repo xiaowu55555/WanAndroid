@@ -67,8 +67,6 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-            getActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
-            getActivity().recreate();
             ((MainActivity)getActivity()).getSwitchManager();
         });
     }
