@@ -24,26 +24,14 @@ import okio.BufferedSource;
 
 public class HttpInterceptor implements Interceptor {
 
-    private static final String TAG = "flyHttp";
+    private static final String TAG = "httpclient";
     private static final Charset UTF8 = Charset.forName("UTF-8");
     private boolean isDebug = BuildConfig.DEBUG;
-    public final static String PRIVATE_TOKEN_KEY = "private-token";
-    public final static String LOCATION_BD_LAT = "location_bd_lat";
-    public final static String LOCATION_BD_LNG = "location_bd_lng";
-    public final static String CHANNEL_ID = "channelId";
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        String private_token = "null";
-        double lat = 0d;
-        double lng = 0d;
         Request request = chain.request()
                 .newBuilder()
-                .addHeader("User-Agent", getUserAgent())
-                .addHeader(PRIVATE_TOKEN_KEY, private_token)
-                .addHeader(LOCATION_BD_LAT, lat + "")
-                .addHeader(LOCATION_BD_LNG, lng + "")
-                .addHeader(CHANNEL_ID, "BDandroid")
                 .build();
 
         if (!isDebug) {
@@ -133,17 +121,17 @@ public class HttpInterceptor implements Interceptor {
             MediaType contentType = requestBody.contentType();
             if (contentType != null) {
                 charset = contentType.charset(charset);
+                if (isPlaintext(buffer)) {
+                    sb.append(buffer.readString(charset));
+                    sb.append(" (Content-Type = ").append(contentType.toString()).append(",")
+                            .append(requestBody.contentLength()).append("-byte body)");
+                } else {
+                    sb.append(" (Content-Type = ").append(contentType.toString())
+                            .append(",binary ").append(requestBody.contentLength()).append("-byte body omitted)");
+                }
+                sb.append("]");
+                Log.e(TAG, String.format(Locale.getDefault(), "%s %s", method, sb.toString()));
             }
-            if (isPlaintext(buffer)) {
-                sb.append(buffer.readString(charset));
-                sb.append(" (Content-Type = ").append(contentType.toString()).append(",")
-                        .append(requestBody.contentLength()).append("-byte body)");
-            } else {
-                sb.append(" (Content-Type = ").append(contentType.toString())
-                        .append(",binary ").append(requestBody.contentLength()).append("-byte body omitted)");
-            }
-            sb.append("]");
-            Log.e(TAG, String.format(Locale.getDefault(), "%s %s", method, sb.toString()));
         }
         long t2 = System.nanoTime();
         //the response time
@@ -172,7 +160,7 @@ public class HttpInterceptor implements Interceptor {
      * Returns true if the body in question probably contains human readable text. Uses a small sample
      * of code points to detect unicode control characters commonly used in binary file signatures.
      */
-    static boolean isPlaintext(Buffer buffer) throws EOFException {
+    private static boolean isPlaintext(Buffer buffer) throws EOFException {
         try {
             Buffer prefix = new Buffer();
             long byteCount = buffer.size() < 64 ? buffer.size() : 64;
@@ -197,13 +185,4 @@ public class HttpInterceptor implements Interceptor {
         return contentEncoding != null && !contentEncoding.equalsIgnoreCase("identity");
     }
 
-    public static String getUserAgent() {
-//        StringBuilder ua = new StringBuilder("idrivespace.com");
-//        ua.append("/appVersion=" + App.getApplication().getPackageInfo().versionName + '_' + App.getApplication().getPackageInfo().versionCode);//App版本
-//        ua.append("/os=Android");
-//        ua.append("/version=" + android.os.Build.VERSION.RELEASE);//手机系统版本
-//        ua.append("/model=" + android.os.Build.MODEL); //手机型号
-//        ua.append("/appId=" + App.getApplication().getAppId());//客户端唯一标识
-        return "idrivespace.com/appVersion=1.1.1(RC)_2016112416/os=Android/version=9/model=Android SDK built for x86/appId=05039055-faac-4ecb-89bb-8af3ae84fdb6";
-    }
 }

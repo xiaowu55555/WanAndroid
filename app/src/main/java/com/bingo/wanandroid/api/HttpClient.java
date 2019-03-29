@@ -35,9 +35,9 @@ public class HttpClient {
     }
 
     private Retrofit getRetrofit() {
-        CacheInterceptor cacheInterceptor = new CacheInterceptor();
-        File httpCacheDirectory = new File(Library.getInstance().getContext().getCacheDir(), "HttpCache");
-        Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
+//        CacheInterceptor cacheInterceptor = new CacheInterceptor();
+//        File httpCacheDirectory = new File(Library.getInstance().getContext().getCacheDir(), "HttpCache");
+//        Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
         builder.readTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
                 .connectTimeout(DEFAULT_TIME, TimeUnit.SECONDS)

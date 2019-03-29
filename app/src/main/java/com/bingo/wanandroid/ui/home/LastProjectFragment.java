@@ -1,20 +1,37 @@
 package com.bingo.wanandroid.ui.home;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ProjectAdapter;
 import com.bingo.wanandroid.entity.Project;
+import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.ui.ArticleDetailActivity;
 import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class LastProjectFragment extends BaseListFragment<Project.DatasBean, ProjectViewModel> {
 
     public static LastProjectFragment newInstance() {
         return new LastProjectFragment();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -40,5 +57,16 @@ public class LastProjectFragment extends BaseListFragment<Project.DatasBean, Pro
     @Override
     protected ProjectViewModel createViewModel() {
         return ViewModelProviders.of(this).get(ProjectViewModel.class);
+    }
+
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
+    }
+
+    @Subscribe
+    public void notifyLogin(User user) {
+        onRefresh();
     }
 }

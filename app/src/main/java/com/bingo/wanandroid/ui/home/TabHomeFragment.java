@@ -17,6 +17,8 @@ import com.frame.library.base.BaseFragment;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 

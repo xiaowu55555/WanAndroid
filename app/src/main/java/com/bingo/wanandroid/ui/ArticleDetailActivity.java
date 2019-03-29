@@ -50,10 +50,10 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.action_like:
-                                if (App.getInstance().isLogin()){
+                                if (App.getInstance().isLogin()) {
                                     setCollect();
                                 } else {
-                                    LoginActivity.start(context);
+                                    ToastUtil.showToast("您还未登录");
                                 }
                                 break;
                             case R.id.action_share:
@@ -68,7 +68,7 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                         return false;
                     }
                 }).getMenuItem(0);
-        if (App.getInstance().isLogin()){
+        if (App.getInstance().isLogin()) {
             menuItem.setTitle(isCollect ? "已收藏" : "收藏");
         } else {
             menuItem.setTitle("收藏");
@@ -83,6 +83,7 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                     if (aBoolean) {
                         isCollect = false;
                         menuItem.setTitle("收藏");
+                        ToastUtil.showToast("取消收藏成功");
                     }
                 }
             });
