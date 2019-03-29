@@ -107,9 +107,18 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
                 }
                 break;
             case R.id.tv_collect:
-                MyCollectActivity.start(context);
+                if (App.getInstance().isLogin()){
+                    MyCollectActivity.start(context);
+                } else {
+                    LoginActivity.start(context);
+                }
                 break;
             case R.id.tv_todo:
+                if (App.getInstance().isLogin()){
+
+                } else {
+                    LoginActivity.start(context);
+                }
                 break;
             case R.id.tv_logout:
                 if (App.getInstance().isLogin()) {
