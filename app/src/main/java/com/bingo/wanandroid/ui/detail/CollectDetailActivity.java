@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.app.App;
 import com.bingo.wanandroid.entity.CollectionEvent;
+import com.bingo.wanandroid.entity.HomeUpdateEvent;
 import com.bingo.wanandroid.entity.MyCollectionEvent;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.WebViewActivity;
@@ -130,6 +131,7 @@ public class CollectDetailActivity extends WebViewActivity<UserViewModel> {
     @Override
     protected void onDestroy() {
         EventBus.getDefault().post(event);
+        EventBus.getDefault().post(new HomeUpdateEvent());
         super.onDestroy();
     }
 }
