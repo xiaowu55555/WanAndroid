@@ -13,8 +13,7 @@
 
         <activity
             android:name=".ui.SplashActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +30,7 @@
             android:name=".ui.article.ArticleListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".ui.ArticleDetailActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -43,6 +42,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.me.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.MyCollectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.CommonDetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

@@ -4,22 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.bingo.wanandroid.R;
+import com.frame.library.base.BaseViewModel;
 import com.frame.library.base.WebViewActivity;
 import com.frame.library.widget.TitleBar;
 
-public class DetailActivity extends WebViewActivity {
+public class CommonDetailActivity extends WebViewActivity {
     private String title;
 
-    public static void start(Context context, String url, String title,boolean collect) {
-        Intent starter = new Intent(context, DetailActivity.class);
+    public static void start(Context context, String url, String title) {
+        Intent starter = new Intent(context, CommonDetailActivity.class);
         starter.putExtra("url", url);
         starter.putExtra("title", title);
-        starter.putExtra("collect", collect);
         context.startActivity(starter);
     }
 
@@ -32,13 +31,12 @@ public class DetailActivity extends WebViewActivity {
     @Override
     protected void setToolBar() {
         MenuItem menuItem = new TitleBar().bind(this).setTitle(Html.fromHtml(title).toString()).enableBack()
-                .setMenu(R.menu.menu_detail, new Toolbar.OnMenuItemClickListener() {
+                .setMenu(R.menu.menu_common_detail, new Toolbar.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         return false;
                     }
                 }).getMenuItem(0);
-        menuItem.setIcon(R.drawable.ic_favorite_black_24dp);
     }
 
     @Override
@@ -49,5 +47,10 @@ public class DetailActivity extends WebViewActivity {
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_detail;
+    }
+
+    @Override
+    protected BaseViewModel createViewModel() {
+        return null;
     }
 }

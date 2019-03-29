@@ -47,11 +47,9 @@ public class HttpClient {
 //                .addInterceptor(cacheInterceptor)
 //                .cache(cache)
                 .retryOnConnectionFailure(true);
-        if (App.getInstance().isLogin()) {
-            //添加cookie
-            PersistentCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
-            builder.cookieJar(cookieJar);
-        }
+        //添加cookie
+        PersistentCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
+        builder.cookieJar(cookieJar);
 
         return new Retrofit.Builder()
                 .client(builder.build())

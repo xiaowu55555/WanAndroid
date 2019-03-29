@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.ViewGroup;
 
 import com.bingo.wanandroid.R;
+import com.frame.library.base.BaseViewModel;
 import com.frame.library.base.WebViewActivity;
 import com.frame.library.widget.TitleBar;
 
@@ -28,6 +29,11 @@ public class AboutActivity extends WebViewActivity {
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_about;
+    }
+
+    @Override
+    protected BaseViewModel createViewModel() {
+        return null;
     }
 
     @Override

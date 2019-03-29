@@ -6,12 +6,14 @@ import android.support.annotation.NonNull;
 
 import com.bingo.wanandroid.api.HttpResult;
 import com.bingo.wanandroid.app.App;
+import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.viewmodel.base.SupportViewModel;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.net.RxSubscriber;
 import com.frame.library.net.RxTransformer;
+import com.frame.library.utils.ToastUtil;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -76,4 +78,84 @@ public class UserViewModel extends SupportViewModel {
                     }
                 });
     }
+
+    public MutableLiveData<Article> getCollection(int pageIndex) {
+        MutableLiveData<Article> data = new MutableLiveData<>();
+        apiService.getCollection(pageIndex)
+                .compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<Article>(this) {
+                    @Override
+                    public void onSuccess(Article article) {
+                        data.setValue(article);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        showError(e.getMessage());
+                    }
+                });
+        return data;
+    }
+
+    public MutableLiveData<Boolean> cancelCollection(long id, long originId) {
+        MutableLiveData<Boolean> data = new MutableLiveData<>();
+        apiService.cancelCollection(id, originId)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
+                    @Override
+                    public void onSuccess(HttpResult result) {
+                        data.setValue(true);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        showToast(e.getMessage());
+                    }
+                });
+        return data;
+    }
+
+    public MutableLiveData<Boolean> collect(long id) {
+        MutableLiveData<Boolean> data = new MutableLiveData<>();
+        apiService.collect(id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
+                    @Override
+                    public void onSuccess(HttpResult result) {
+                        data.setValue(true);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        showToast(e.getMessage());
+                    }
+                });
+        return data;
+    }
+
+    public MutableLiveData<Boolean> articleCancelCollection(long id) {
+        MutableLiveData<Boolean> data = new MutableLiveData<>();
+        apiService.articleCancel(id)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
+                    @Override
+                    public void onSuccess(HttpResult result) {
+                        data.setValue(true);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        showToast(e.getMessage());
+                    }
+                });
+        return data;
+    }
+
+
 }

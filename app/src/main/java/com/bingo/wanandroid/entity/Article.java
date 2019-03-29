@@ -134,6 +134,15 @@ public class Article {
         private int visible;
         private int zan;
         private List<TagsBean> tags;
+        private long originId;
+
+        public long getOriginId() {
+            return originId;
+        }
+
+        public void setOriginId(long originId) {
+            this.originId = originId;
+        }
 
         public String getApkLink() {
             return apkLink;

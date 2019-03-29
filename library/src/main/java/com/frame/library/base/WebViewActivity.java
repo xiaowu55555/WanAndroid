@@ -10,7 +10,7 @@ import com.just.agentweb.AgentWeb;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
-public abstract class WebViewActivity extends BaseSwipeBackActivity {
+public abstract class WebViewActivity<T extends BaseViewModel> extends BaseSwipeBackActivity<T> {
     protected String url;
     private AgentWeb mAgentWeb;
 
@@ -30,11 +30,6 @@ public abstract class WebViewActivity extends BaseSwipeBackActivity {
     }
 
     protected abstract ViewGroup getWebContentView();
-
-    @Override
-    protected BaseViewModel createViewModel() {
-        return null;
-    }
 
     @Override
     protected void onPause() {

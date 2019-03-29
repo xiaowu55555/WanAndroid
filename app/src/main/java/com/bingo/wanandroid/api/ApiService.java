@@ -67,4 +67,22 @@ public interface ApiService {
     @GET("user/logout/json")
     Observable<HttpResult> logout();
 
+    //我的收藏列表
+    @GET("lg/collect/list/{pageIndex}/json")
+    Observable<HttpResult<Article>> getCollection(@Path("pageIndex") int pageIndex);
+
+    //我的收藏取消收藏
+    @FormUrlEncoded
+    @POST("lg/uncollect/{id}/json")
+    Observable<HttpResult> cancelCollection(@Path("id") long id, @Field("originId") long originId);
+
+    //收藏站内文章
+    @POST("lg/collect/{id}/json")
+    Observable<HttpResult> collect(@Path("id") long id);
+
+    //文章列表取消收藏
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<HttpResult> articleCancel(@Path("id") long id);
+
+
 }

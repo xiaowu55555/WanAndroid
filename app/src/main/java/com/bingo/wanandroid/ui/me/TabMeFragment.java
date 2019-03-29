@@ -13,6 +13,7 @@ import com.bingo.wanandroid.constant.Constant;
 import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.ui.MainActivity;
 import com.bingo.wanandroid.ui.user.LoginActivity;
+import com.bingo.wanandroid.ui.user.MyCollectActivity;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.BaseFragment;
 import com.frame.library.utils.SPUtils;
@@ -106,6 +107,7 @@ public class TabMeFragment extends BaseFragment<UserViewModel> implements View.O
                 }
                 break;
             case R.id.tv_collect:
+                MyCollectActivity.start(context);
                 break;
             case R.id.tv_todo:
                 break;

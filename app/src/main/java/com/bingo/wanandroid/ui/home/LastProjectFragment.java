@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ProjectAdapter;
 import com.bingo.wanandroid.entity.Project;
-import com.bingo.wanandroid.ui.DetailActivity;
+import com.bingo.wanandroid.ui.ArticleDetailActivity;
 import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -19,7 +19,7 @@ public class LastProjectFragment extends BaseListFragment<Project.DatasBean, Pro
 
     @Override
     protected void onItemClick(Project.DatasBean item) {
-        DetailActivity.start(context,item.getLink(),item.getTitle(),item.isCollect());
+        ArticleDetailActivity.start(context,item.getId(),item.getLink(),item.getTitle(),item.isCollect());
     }
 
     @Override
