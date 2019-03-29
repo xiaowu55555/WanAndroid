@@ -30,7 +30,7 @@
             android:name=".ui.article.ArticleListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.ArticleDetailActivity"
+            android:name=".ui.detail.ArticleDetailActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -47,7 +47,10 @@
             android:name=".ui.user.MyCollectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.CommonDetailActivity"
+            android:name=".ui.detail.CommonDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.detail.CollectDetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

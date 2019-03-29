@@ -3,9 +3,7 @@ package com.bingo.wanandroid.ui.article;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.WxArticleAdapter;
@@ -23,7 +21,7 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
     }
 
     @Override
-    protected void onItemClick(WxArticle item) {
+    protected void onItemClick(WxArticle item, int position) {
         ArticleListActivity.start(context, item);
     }
 

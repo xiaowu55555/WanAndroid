@@ -1,4 +1,4 @@
-package com.bingo.wanandroid.ui;
+package com.bingo.wanandroid.ui.detail;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -13,23 +13,29 @@ import android.view.ViewGroup;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.app.App;
-import com.bingo.wanandroid.ui.user.LoginActivity;
+import com.bingo.wanandroid.entity.CollectionEvent;
+import com.bingo.wanandroid.entity.MyCollectionEvent;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
 import com.frame.library.base.WebViewActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
-public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
+import org.greenrobot.eventbus.EventBus;
+
+public class CollectDetailActivity extends WebViewActivity<UserViewModel> {
+
     private String title;
-    private boolean isCollect;
+    private boolean isCollect = true;
     private MenuItem menuItem;
     private long id;
+    private long originId;
+    private CollectionEvent event;
 
-    public static void start(Context context, long id, String url, String title, boolean collect) {
-        Intent starter = new Intent(context, ArticleDetailActivity.class);
+    public static void start(Context context, long id, long originId, String url, String title) {
+        Intent starter = new Intent(context, CollectDetailActivity.class);
         starter.putExtra("url", url);
+        starter.putExtra("originId", originId);
         starter.putExtra("title", title);
-        starter.putExtra("collect", collect);
         starter.putExtra("id", id);
         context.startActivity(starter);
     }
@@ -38,8 +44,8 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
     protected void getIntentData() {
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
-        isCollect = getIntent().getBooleanExtra("collect", false);
         id = getIntent().getLongExtra("id", 0);
+        originId = getIntent().getLongExtra("originId", -1);
     }
 
     @Override
@@ -50,11 +56,7 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.action_like:
-                                if (App.getInstance().isLogin()) {
-                                    setCollect();
-                                } else {
-                                    ToastUtil.showToast("您还未登录");
-                                }
+                                setCollect();
                                 break;
                             case R.id.action_share:
                                 showShare();
@@ -68,22 +70,20 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                         return false;
                     }
                 }).getMenuItem(0);
-        if (App.getInstance().isLogin()) {
-            menuItem.setTitle(isCollect ? "已收藏" : "收藏");
-        } else {
-            menuItem.setTitle("收藏");
-        }
+        menuItem.setTitle("已收藏");
     }
 
     private void setCollect() {
+        event = new CollectionEvent();
         if (isCollect) {
-            viewModel.articleCancelCollection(id).observe(this, new Observer<Boolean>() {
+            viewModel.cancelCollection(id,originId).observe(this, new Observer<Boolean>() {
                 @Override
                 public void onChanged(@Nullable Boolean aBoolean) {
                     if (aBoolean) {
                         isCollect = false;
                         menuItem.setTitle("收藏");
                         ToastUtil.showToast("取消收藏成功");
+                        event.setCollect(isCollect);
                     }
                 }
             });
@@ -95,6 +95,7 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                         ToastUtil.showToast("收藏成功");
                         isCollect = true;
                         menuItem.setTitle("已收藏");
+                        event.setCollect(isCollect);
                     }
                 }
             });
@@ -124,5 +125,11 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
     @Override
     protected UserViewModel createViewModel() {
         return ViewModelProviders.of(this).get(UserViewModel.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().post(event);
+        super.onDestroy();
     }
 }

@@ -9,15 +9,12 @@ import android.view.View;
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.TabFragmentAdapter;
 import com.bingo.wanandroid.entity.HomeBanner;
-import com.bingo.wanandroid.ui.ArticleDetailActivity;
-import com.bingo.wanandroid.ui.CommonDetailActivity;
+import com.bingo.wanandroid.ui.detail.CommonDetailActivity;
 import com.bingo.wanandroid.utils.GlideImageLoader;
 import com.bingo.wanandroid.viewmodel.HomeViewModel;
 import com.frame.library.base.BaseFragment;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;

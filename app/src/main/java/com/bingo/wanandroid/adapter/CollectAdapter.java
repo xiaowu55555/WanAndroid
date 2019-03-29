@@ -33,5 +33,6 @@ public class CollectAdapter extends BaseQuickAdapter<Article.DatasBean, BaseView
             helper.getView(R.id.tv_tag).setVisibility(View.GONE);
         }
         helper.addOnClickListener(R.id.right);
+        helper.addOnClickListener(R.id.content);
     }
 }

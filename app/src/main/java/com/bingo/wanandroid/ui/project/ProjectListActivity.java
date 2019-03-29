@@ -9,7 +9,7 @@ import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ProjectAdapter;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.ProjectTree;
-import com.bingo.wanandroid.ui.ArticleDetailActivity;
+import com.bingo.wanandroid.ui.detail.ArticleDetailActivity;
 import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -43,7 +43,7 @@ public class ProjectListActivity extends BaseListActivity<Project.DatasBean, Pro
     }
 
     @Override
-    protected void onItemClick(Project.DatasBean item) {
+    protected void onItemClick(Project.DatasBean item, int position) {
         ArticleDetailActivity.start(context,item.getId(),item.getLink(),item.getTitle(),item.isCollect());
     }
 

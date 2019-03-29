@@ -1,4 +1,4 @@
-package com.bingo.wanandroid.ui;
+package com.bingo.wanandroid.ui.detail;
 
 import android.content.Context;
 import android.content.Intent;

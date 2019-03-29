@@ -9,7 +9,7 @@ import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ArticleAdapter;
 import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.WxArticle;
-import com.bingo.wanandroid.ui.ArticleDetailActivity;
+import com.bingo.wanandroid.ui.detail.ArticleDetailActivity;
 import com.bingo.wanandroid.viewmodel.ArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -41,7 +41,7 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
     }
 
     @Override
-    protected void onItemClick(Article.DatasBean item) {
+    protected void onItemClick(Article.DatasBean item, int position) {
         ArticleDetailActivity.start(context, item.getId(),item.getLink(), item.getTitle(),item.isCollect());
     }
 

@@ -1,9 +1,12 @@
 package com.bingo.wanandroid.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Article {
@@ -83,7 +86,9 @@ public class Article {
         this.datas = datas;
     }
 
-    public static class DatasBean implements MultiItemEntity {
+    public static class DatasBean implements MultiItemEntity, Parcelable {
+
+
         /**
          * apkLink :
          * author : 鸿洋
@@ -362,5 +367,81 @@ public class Article {
                 this.url = url;
             }
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.apkLink);
+            dest.writeString(this.author);
+            dest.writeInt(this.chapterId);
+            dest.writeString(this.chapterName);
+            dest.writeByte(this.collect ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.courseId);
+            dest.writeString(this.desc);
+            dest.writeString(this.envelopePic);
+            dest.writeByte(this.fresh ? (byte) 1 : (byte) 0);
+            dest.writeLong(this.id);
+            dest.writeString(this.link);
+            dest.writeString(this.niceDate);
+            dest.writeString(this.origin);
+            dest.writeString(this.projectLink);
+            dest.writeLong(this.publishTime);
+            dest.writeInt(this.superChapterId);
+            dest.writeString(this.superChapterName);
+            dest.writeString(this.title);
+            dest.writeInt(this.type);
+            dest.writeInt(this.userId);
+            dest.writeInt(this.visible);
+            dest.writeInt(this.zan);
+            dest.writeList(this.tags);
+            dest.writeLong(this.originId);
+        }
+
+        public DatasBean() {
+        }
+
+        protected DatasBean(Parcel in) {
+            this.apkLink = in.readString();
+            this.author = in.readString();
+            this.chapterId = in.readInt();
+            this.chapterName = in.readString();
+            this.collect = in.readByte() != 0;
+            this.courseId = in.readInt();
+            this.desc = in.readString();
+            this.envelopePic = in.readString();
+            this.fresh = in.readByte() != 0;
+            this.id = in.readLong();
+            this.link = in.readString();
+            this.niceDate = in.readString();
+            this.origin = in.readString();
+            this.projectLink = in.readString();
+            this.publishTime = in.readLong();
+            this.superChapterId = in.readInt();
+            this.superChapterName = in.readString();
+            this.title = in.readString();
+            this.type = in.readInt();
+            this.userId = in.readInt();
+            this.visible = in.readInt();
+            this.zan = in.readInt();
+            this.tags = new ArrayList<TagsBean>();
+            in.readList(this.tags, TagsBean.class.getClassLoader());
+            this.originId = in.readLong();
+        }
+
+        public static final Creator<DatasBean> CREATOR = new Creator<DatasBean>() {
+            @Override
+            public DatasBean createFromParcel(Parcel source) {
+                return new DatasBean(source);
+            }
+
+            @Override
+            public DatasBean[] newArray(int size) {
+                return new DatasBean[size];
+            }
+        };
     }
 }

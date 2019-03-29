@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ArticleAdapter;
 import com.bingo.wanandroid.entity.Article;
+import com.bingo.wanandroid.entity.CollectionEvent;
+import com.bingo.wanandroid.entity.HomeUpdateEvent;
 import com.bingo.wanandroid.entity.User;
-import com.bingo.wanandroid.ui.ArticleDetailActivity;
+import com.bingo.wanandroid.ui.detail.ArticleDetailActivity;
 import com.bingo.wanandroid.viewmodel.ArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,6 +24,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class LastArticleFragment extends BaseListFragment<Article.DatasBean, ArticleViewModel> {
+
+    private int position = -1;
 
     public static LastArticleFragment newInstance() {
         return new LastArticleFragment();
@@ -35,8 +39,9 @@ public class LastArticleFragment extends BaseListFragment<Article.DatasBean, Art
     }
 
     @Override
-    protected void onItemClick(Article.DatasBean item) {
-        ArticleDetailActivity.start(context,item.getId(),item.getLink(),item.getTitle(),item.isCollect());
+    protected void onItemClick(Article.DatasBean item, int position) {
+        this.position = position;
+        ArticleDetailActivity.start(context, item.getId(), item.getLink(), item.getTitle(), item.isCollect());
     }
 
     @Override
@@ -67,6 +72,19 @@ public class LastArticleFragment extends BaseListFragment<Article.DatasBean, Art
 
     @Subscribe
     public void notifyLogin(User user) {
+        onRefresh();
+    }
+
+    @Subscribe
+    public void setCollect(CollectionEvent event) {
+        Article.DatasBean item = adapter.getItem(position);
+        if (item != null) {
+            item.setCollect(event.isCollect());
+        }
+    }
+
+    @Subscribe
+    public void refresh(HomeUpdateEvent event){
         onRefresh();
     }
 }

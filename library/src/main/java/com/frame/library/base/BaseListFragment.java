@@ -13,7 +13,6 @@ import com.frame.library.R;
 import com.frame.library.Library;
 import com.frame.library.utils.NetworkUtils;
 import com.frame.library.utils.ToastUtil;
-import com.frame.library.widget.MultipleStatusView;
 
 import java.util.List;
 
@@ -49,11 +48,11 @@ public abstract class BaseListFragment<V, T extends BaseViewModel> extends BaseF
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         V item = this.adapter.getItem(position);
         if (item != null) {
-            onItemClick(item);
+            onItemClick(item,position);
         }
     }
 
-    protected abstract void onItemClick(V item);
+    protected abstract void onItemClick(V item, int position);
 
     protected void setListData(List<V> list) {
         showContent();
