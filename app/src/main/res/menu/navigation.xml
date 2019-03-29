@@ -15,6 +15,11 @@
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_project_black_24dp"
         android:title="@string/title_project" />
+
+    <item
+        android:id="@+id/navigation_tree"
+        android:icon="@drawable/ic_tree_black_24dp"
+        android:title="@string/title_tree" />
     <item
         android:id="@+id/navigation_user"
         android:icon="@drawable/ic_person_black_24dp"
