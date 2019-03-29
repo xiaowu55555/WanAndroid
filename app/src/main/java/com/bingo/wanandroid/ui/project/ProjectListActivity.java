@@ -7,6 +7,7 @@ import android.text.Html;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ProjectAdapter;
+import com.bingo.wanandroid.entity.CollectionEvent;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.ProjectTree;
 import com.bingo.wanandroid.ui.detail.ArticleDetailActivity;
@@ -17,9 +18,12 @@ import com.frame.library.base.BaseListActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 
 public class ProjectListActivity extends BaseListActivity<Project.DatasBean, ProjectViewModel> {
-
+    private int position = -1;
     private ProjectTree tree;
 
     public static void start(Context context, ProjectTree tree) {
@@ -39,11 +43,13 @@ public class ProjectListActivity extends BaseListActivity<Project.DatasBean, Pro
 
     @Override
     protected void setToolBar() {
+        EventBus.getDefault().register(this);
         new TitleBar().bind(this).setTitle(Html.fromHtml(tree.getName()).toString()).enableBack();
     }
 
     @Override
     protected void onItemClick(Project.DatasBean item, int position) {
+        this.position = position;
         ArticleDetailActivity.start(context,item.getId(),item.getLink(),item.getTitle(),item.isCollect());
     }
 
@@ -66,5 +72,19 @@ public class ProjectListActivity extends BaseListActivity<Project.DatasBean, Pro
     @Override
     protected ProjectViewModel createViewModel() {
         return ViewModelProviders.of(this).get(ProjectViewModel.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe
+    public void setCollect(CollectionEvent event) {
+        Project.DatasBean item = adapter.getItem(position);
+        if (item != null) {
+            item.setCollect(event.isCollect());
+        }
     }
 }

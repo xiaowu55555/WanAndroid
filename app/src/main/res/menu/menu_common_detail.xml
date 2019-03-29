@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/action_like"
-        android:icon="@drawable/ic_favorite_normal_24dp"
-        android:title="收藏"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_share"
         android:icon="@drawable/ic_favorite_normal_24dp"
         android:title="分享"

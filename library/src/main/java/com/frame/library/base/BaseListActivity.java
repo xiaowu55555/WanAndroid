@@ -55,7 +55,7 @@ public abstract class BaseListActivity<V, T extends BaseViewModel> extends BaseS
     protected void setListData(List<V> list) {
         showContent();
         adapter.setEmptyView(getEmptyView());
-        if (list != null && list.size() > 0) {
+        if (list != null) {
             if (pageIndex == 0) {
                 adapter.setNewData(list);
             } else {
