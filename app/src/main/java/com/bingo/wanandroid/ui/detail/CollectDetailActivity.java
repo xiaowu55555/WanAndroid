@@ -77,7 +77,7 @@ public class CollectDetailActivity extends WebViewActivity<UserViewModel> {
     private void setCollect() {
         event = new CollectionEvent();
         if (isCollect) {
-            viewModel.cancelCollection(id,originId).observe(this, new Observer<Boolean>() {
+            viewModel.cancelCollection(id, originId).observe(this, new Observer<Boolean>() {
                 @Override
                 public void onChanged(@Nullable Boolean aBoolean) {
                     if (aBoolean) {
@@ -130,8 +130,10 @@ public class CollectDetailActivity extends WebViewActivity<UserViewModel> {
 
     @Override
     protected void onDestroy() {
-        EventBus.getDefault().post(event);
-        EventBus.getDefault().post(new HomeUpdateEvent());
+        if (!isCollect) {
+            EventBus.getDefault().post(event);
+            EventBus.getDefault().post(new HomeUpdateEvent());
+        }
         super.onDestroy();
     }
 }
