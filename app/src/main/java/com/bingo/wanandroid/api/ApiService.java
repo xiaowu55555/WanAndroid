@@ -89,4 +89,8 @@ public interface ApiService {
     @GET("tree/json")
     Observable<HttpResult<List<Tree>>> getTree();
 
+    //知识体系下的文章
+    @GET("article/list/{pageIndex}/json?")
+    Observable<HttpResult<Article>> getTreeActicel(@Path("pageIndex") int pageIndex, @Query("cid") long cid);
+
 }

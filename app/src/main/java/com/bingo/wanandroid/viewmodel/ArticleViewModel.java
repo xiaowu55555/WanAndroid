@@ -105,21 +105,23 @@ public class ArticleViewModel extends SupportViewModel {
         return data;
     }
 
-    private List<Tree> parseData(List<Tree> trees) {
-        List<Tree> list = new ArrayList<>();
-        if (trees != null && trees.size() > 0) {
-            for (int i = 0; i < trees.size(); i++) {
-                Tree tree = trees.get(i);
-                list.add(new Tree(true, tree.getName()));
-                List<TreeChild> treeChild = tree.getChildren();
-                if (treeChild != null && treeChild.size() > 0) {
-                    for (int j = 0; j < treeChild.size(); j++) {
-                        list.add(new Tree(treeChild.get(j)));
+    //知识体系下文章
+    public MutableLiveData<Article> getTreeArticle(long id, int page) {
+        MutableLiveData<Article> data = new MutableLiveData<>();
+        apiService.getTreeActicel(page, id)
+                .compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<Article>(this) {
+                    @Override
+                    public void onSuccess(Article article) {
+                        data.setValue(article);
                     }
-                }
-            }
-            return list;
-        }
-        return null;
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        showError(e.getMessage());
+                    }
+                });
+        return data;
     }
+
 }

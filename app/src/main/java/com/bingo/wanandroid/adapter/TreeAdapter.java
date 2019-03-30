@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.entity.Tree;
 import com.bingo.wanandroid.entity.TreeChild;
+import com.bingo.wanandroid.ui.Tree.TreeArticleListActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -46,7 +47,7 @@ public class TreeAdapter extends BaseQuickAdapter<Tree, BaseViewHolder> {
             child.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    KnowledgeFragment.startKnowledgeTreeTabActivity(mContext, item, pos);
+                    TreeArticleListActivity.start(mContext, tree.getName(), tree.getId());
                 }
             });
 

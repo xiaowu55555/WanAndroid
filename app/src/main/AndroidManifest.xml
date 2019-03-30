@@ -13,8 +13,8 @@
 
         <activity
             android:name=".ui.SplashActivity"
-            android:theme="@style/FadeTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/FadeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +23,8 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/FadeTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/FadeTheme" />
         <activity
             android:name=".ui.project.ProjectListActivity"
             android:screenOrientation="portrait" />
@@ -53,6 +53,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.detail.CollectDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Tree.TreeArticleListActivity"
             android:screenOrientation="portrait" />
     </application>
 
