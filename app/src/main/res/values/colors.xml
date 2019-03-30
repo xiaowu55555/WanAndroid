@@ -12,8 +12,11 @@
     <!-- item -->
     <color name="common_color">#19191B</color>
     <color name="item_title">#19191B</color>
+    <color name="item_title_read">@color/Grey500</color>
     <color name="item_author">@color/Grey700</color>
+    <color name="item_author_read">@color/Grey600</color>
     <color name="item_desc">@color/Grey600</color>
+    <color name="item_desc_read">@color/Grey500</color>
     <color name="item_time">@color/Grey600</color>
     <color name="item_date">@color/Grey600</color>
     <color name="item_chapter">@color/Grey600</color>

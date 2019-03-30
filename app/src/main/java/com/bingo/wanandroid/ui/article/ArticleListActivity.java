@@ -15,6 +15,7 @@ import com.bingo.wanandroid.viewmodel.ArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListActivity;
+import com.frame.library.utils.SPUtils;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
 
@@ -49,7 +50,11 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
     @Override
     protected void onItemClick(Article.DatasBean item, int position) {
         this.position = position;
-        ArticleDetailActivity.start(context, item.getId(),item.getLink(), item.getTitle(),item.isCollect());
+        ArticleDetailActivity.start(context, item.getId(), item.getLink(), item.getTitle(), item.isCollect());
+        if (!SPUtils.getInstance().getBoolean(String.valueOf(item.getId()), false)) {
+            SPUtils.getInstance().put(String.valueOf(item.getId()), true);
+            adapter.notifyItemChanged(position);
+        }
     }
 
     @Override

@@ -11,8 +11,11 @@
 
     <color name="common_color">@color/Grey300</color>
     <color name="item_title">@color/Grey300</color>
-    <color name="item_author">@color/Grey500</color>
-    <color name="item_desc">@color/Grey500</color>
+    <color name="item_title_read">@color/Grey500</color>
+    <color name="item_author">@color/Grey400</color>
+    <color name="item_author_read">@color/Grey500</color>
+    <color name="item_desc">@color/Grey400</color>
+    <color name="item_desc_read">@color/Grey500</color>
     <color name="item_time">@color/Grey500</color>
     <color name="item_date">@color/Grey500</color>
     <color name="item_chapter">@color/Grey500</color>

@@ -9,6 +9,7 @@ import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.entity.Article;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.frame.library.utils.SPUtils;
 
 public class ArticleAdapter extends BaseQuickAdapter<Article.DatasBean, BaseViewHolder> {
 
@@ -18,6 +19,16 @@ public class ArticleAdapter extends BaseQuickAdapter<Article.DatasBean, BaseView
 
     @Override
     protected void convert(BaseViewHolder helper, Article.DatasBean item) {
+        boolean isRead = SPUtils.getInstance().getBoolean(String.valueOf(item.getId()), false);
+        if (isRead) {
+            helper.setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.item_title_read));
+            helper.setTextColor(R.id.tv_des, mContext.getResources().getColor(R.color.item_desc_read));
+            helper.setTextColor(R.id.tv_author, mContext.getResources().getColor(R.color.item_author_read));
+        } else {
+            helper.setTextColor(R.id.tv_title, mContext.getResources().getColor(R.color.item_title));
+            helper.setTextColor(R.id.tv_des, mContext.getResources().getColor(R.color.item_desc));
+            helper.setTextColor(R.id.tv_author, mContext.getResources().getColor(R.color.item_author));
+        }
         helper.setText(R.id.tv_title, Html.fromHtml(item.getTitle()));
         helper.setText(R.id.tv_author, item.getAuthor());
         helper.setText(R.id.tv_time, item.getNiceDate());

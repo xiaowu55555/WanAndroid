@@ -19,6 +19,7 @@ import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.frame.library.base.BaseListFragment;
+import com.frame.library.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,6 +43,10 @@ public class LastProjectFragment extends BaseListFragment<Project.DatasBean, Pro
     protected void onItemClick(Project.DatasBean item, int position) {
         this.position = position;
         ArticleDetailActivity.start(context, item.getId(), item.getLink(), item.getTitle(), item.isCollect());
+        if (!SPUtils.getInstance().getBoolean(String.valueOf(item.getId()), false)) {
+            SPUtils.getInstance().put(String.valueOf(item.getId()), true);
+            adapter.notifyItemChanged(position);
+        }
     }
 
     @Override
