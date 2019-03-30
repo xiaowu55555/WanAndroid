@@ -44,12 +44,7 @@ public class TreeAdapter extends BaseQuickAdapter<Tree, BaseViewHolder> {
             content.setSpan(new UnderlineSpan(), 0, name.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
             textView.setText(content);
             final int pos = i;
-            child.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    TreeArticleListActivity.start(mContext, tree.getName(), tree.getId());
-                }
-            });
+            child.setOnClickListener(v -> TreeArticleListActivity.start(mContext, tree.getName(), tree.getId()));
 
             layoutFlow.addView(child);
         }

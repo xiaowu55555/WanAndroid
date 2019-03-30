@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.bingo.wanandroid.api.HttpResult;
+import com.bingo.wanandroid.api.cookie.CookiesManager;
 import com.bingo.wanandroid.app.App;
 import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.Project;
@@ -63,21 +64,23 @@ public class UserViewModel extends SupportViewModel {
     }
 
     public void logout() {
-        apiService.logout()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RxSubscriber<HttpResult>(this) {
-                    @Override
-                    public void onSuccess(HttpResult result) {
-                        App.getInstance().logout();
-                    }
-
-                    @Override
-                    public void onFailed(Throwable e) {
-                        App.getInstance().logout();
-                    }
-                });
+        CookiesManager.clearAllCookies();
+        App.getInstance().logout();
+//        apiService.logout()
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new RxSubscriber<HttpResult>(this) {
+//                    @Override
+//                    public void onSuccess(HttpResult result) {
+//                        App.getInstance().logout();
+//                    }
+//
+//                    @Override
+//                    public void onFailed(Throwable e) {
+//                        App.getInstance().logout();
+//                    }
+//                });
     }
 
     public MutableLiveData<Article> getCollection(int pageIndex) {

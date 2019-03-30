@@ -1,18 +1,11 @@
 package com.bingo.wanandroid.api;
 
 
-import com.bingo.wanandroid.app.App;
-import com.frame.library.Library;
-import com.frame.library.net.interceptor.CacheInterceptor;
+import com.bingo.wanandroid.api.cookie.CookiesManager;
 import com.frame.library.net.interceptor.HttpInterceptor;
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -46,10 +39,8 @@ public class HttpClient {
 //                .addNetworkInterceptor(cacheInterceptor)
 //                .addInterceptor(cacheInterceptor)
 //                .cache(cache)
-                .retryOnConnectionFailure(true);
-        //添加cookie
-        PersistentCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(App.getInstance()));
-        builder.cookieJar(cookieJar);
+                .retryOnConnectionFailure(true)
+                .cookieJar(new CookiesManager());
 
         return new Retrofit.Builder()
                 .client(builder.build())
