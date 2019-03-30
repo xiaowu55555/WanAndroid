@@ -19,6 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserViewModel extends SupportViewModel {
+
     public UserViewModel(@NonNull Application application) {
         super(application);
     }

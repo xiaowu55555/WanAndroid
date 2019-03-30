@@ -1,6 +1,5 @@
 package com.bingo.wanandroid.ui.user;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.bingo.wanandroid.R;
-import com.bingo.wanandroid.entity.User;
+import com.bingo.wanandroid.ui.AboutActivity;
 import com.bingo.wanandroid.viewmodel.UserViewModel;
-import com.frame.library.base.BaseActivity;
 import com.frame.library.base.BaseSwipeBackActivity;
 import com.frame.library.utils.ToastUtil;
 import com.frame.library.widget.TitleBar;
@@ -87,7 +85,7 @@ public class LoginActivity extends BaseSwipeBackActivity<UserViewModel> implemen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (resultCode==RESULT_OK){
             finish();
         }
     }

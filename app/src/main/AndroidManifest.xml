@@ -13,6 +13,7 @@
 
         <activity
             android:name=".ui.SplashActivity"
+            android:theme="@style/FadeTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +23,8 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:theme="@style/FadeTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.project.ProjectListActivity"
             android:screenOrientation="portrait" />
