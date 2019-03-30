@@ -3,11 +3,14 @@ package com.bingo.wanandroid.ui.article;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.WxArticleAdapter;
 import com.bingo.wanandroid.entity.WxArticle;
+import com.bingo.wanandroid.ui.search.SearchActivity;
 import com.bingo.wanandroid.viewmodel.TabWxArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -32,7 +35,15 @@ public class TabWxArticleFragment extends BaseListFragment<WxArticle, TabWxArtic
 
     @Override
     protected void setToolBar(LinearLayout rootView) {
-        new TitleBar().bind(context, rootView).setTitle("公众号列表");
+        new TitleBar().bind(context, rootView).setTitle("公众号列表").setMenu(R.menu.menu_search, new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.action_search) {
+                    SearchActivity.start(context);
+                }
+                return false;
+            }
+        });
 
     }
 

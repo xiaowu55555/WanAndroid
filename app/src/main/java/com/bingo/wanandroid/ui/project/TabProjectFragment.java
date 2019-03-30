@@ -3,7 +3,9 @@ package com.bingo.wanandroid.ui.project;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +40,12 @@ public class TabProjectFragment extends BaseFragment<ProjectViewModel> {
 
     @Override
     protected void setToolBar(LinearLayout rootView) {
-        new TitleBar().bind(context,rootView).setTitle("项目分类");
+        new TitleBar().bind(context,rootView).setTitle("项目分类").setMenu(R.menu.menu_search, new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return false;
+            }
+        });
     }
 
     @Override

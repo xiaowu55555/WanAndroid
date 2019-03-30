@@ -3,7 +3,12 @@ package com.bingo.wanandroid.ui.article;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.MenuItem;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.ArticleAdapter;
@@ -44,7 +49,18 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
     @Override
     protected void setToolBar() {
         EventBus.getDefault().register(this);
-        new TitleBar().bind(this).setTitle(Html.fromHtml(wxArticle.getName()).toString()).enableBack();
+        MenuItem menuItem = new TitleBar().bind(this).setTitle(Html.fromHtml(wxArticle.getName()).toString()).enableBack().setMenu(R.menu.menu_wechat_search, new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                return false;
+            }
+        }).getMenuItem(0);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setQueryHint("公众号内搜索");
+        SearchView.SearchAutoComplete tv = searchView.findViewById(R.id.search_src_text);
+        tv.setTextColor(Color.WHITE);
+        tv.setHintTextColor(getResources().getColor(R.color.bg_gray));
+        tv.setTextSize(16);
     }
 
     @Override

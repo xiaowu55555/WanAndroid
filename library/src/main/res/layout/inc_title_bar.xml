@@ -13,6 +13,7 @@
         android:layout_height="44dp"
         android:background="@color/colorPrimary"
         android:elevation="2dp"
+        style="@style/Toolbar.MyStyle"
         android:orientation="vertical"
         app:popupTheme="@style/ToolbarPopupTheme"
         tools:targetApi="lollipop">
