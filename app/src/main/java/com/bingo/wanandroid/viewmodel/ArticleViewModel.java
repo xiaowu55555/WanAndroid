@@ -9,11 +9,14 @@ import com.bingo.wanandroid.api.HttpClient;
 import com.bingo.wanandroid.api.HttpResult;
 import com.bingo.wanandroid.app.App;
 import com.bingo.wanandroid.entity.Article;
+import com.bingo.wanandroid.entity.Tree;
+import com.bingo.wanandroid.entity.TreeChild;
 import com.bingo.wanandroid.viewmodel.base.SupportViewModel;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.net.RxSubscriber;
 import com.frame.library.net.RxTransformer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -82,5 +85,41 @@ public class ArticleViewModel extends SupportViewModel {
                     }
                 });
         return data;
+    }
+
+    //知识体系
+    public MutableLiveData<List<Tree>> getTreeList() {
+        MutableLiveData<List<Tree>> data = new MutableLiveData<>();
+        apiService.getTree().compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<List<Tree>>(this) {
+                    @Override
+                    public void onSuccess(List<Tree> trees) {
+                        data.setValue(trees);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+
+                    }
+                });
+        return data;
+    }
+
+    private List<Tree> parseData(List<Tree> trees) {
+        List<Tree> list = new ArrayList<>();
+        if (trees != null && trees.size() > 0) {
+            for (int i = 0; i < trees.size(); i++) {
+                Tree tree = trees.get(i);
+                list.add(new Tree(true, tree.getName()));
+                List<TreeChild> treeChild = tree.getChildren();
+                if (treeChild != null && treeChild.size() > 0) {
+                    for (int j = 0; j < treeChild.size(); j++) {
+                        list.add(new Tree(treeChild.get(j)));
+                    }
+                }
+            }
+            return list;
+        }
+        return null;
     }
 }

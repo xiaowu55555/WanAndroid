@@ -4,6 +4,7 @@ import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.HomeBanner;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.ProjectTree;
+import com.bingo.wanandroid.entity.Tree;
 import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.entity.WxArticle;
 
@@ -84,5 +85,8 @@ public interface ApiService {
     @POST("lg/uncollect_originId/{id}/json")
     Observable<HttpResult> articleCancel(@Path("id") long id);
 
+    //知识体系
+    @GET("tree/json")
+    Observable<HttpResult<List<Tree>>> getTree();
 
 }

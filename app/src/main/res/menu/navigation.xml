@@ -20,9 +20,5 @@
         android:id="@+id/navigation_tree"
         android:icon="@drawable/ic_tree_black_24dp"
         android:title="@string/title_tree" />
-    <item
-        android:id="@+id/navigation_user"
-        android:icon="@drawable/ic_person_black_24dp"
-        android:title="@string/title_me" />
 
 </menu>

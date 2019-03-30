@@ -1,19 +1,16 @@
-package com.bingo.wanandroid.ui.me;
+package com.bingo.wanandroid.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bingo.wanandroid.BuildConfig;
 import com.bingo.wanandroid.R;
-import com.frame.library.base.BaseActivity;
 import com.frame.library.base.BaseSwipeBackActivity;
 import com.frame.library.base.BaseViewModel;
-import com.frame.library.base.WebViewActivity;
 import com.frame.library.widget.TitleBar;
 
 public class AboutActivity extends BaseSwipeBackActivity {

@@ -24,13 +24,18 @@
     </style>
 
     <style name="EditScreenTextInputLayoutStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorControlNormal">#00bcd4</item>
-        <item name="colorControlActivated">#00bcd4</item>
-        <item name="colorControlHighlight">#00bcd4</item>
-        <item name="colorAccent">#00bcd4</item>
-        <item name="android:textColorHint">#00bcd4</item>
+        <item name="colorControlNormal">@color/Teal</item>
+        <item name="colorControlActivated">@color/Teal</item>
+        <item name="colorControlHighlight">@color/Teal</item>
+        <item name="colorAccent">@color/Teal</item>
+        <item name="android:textColorHint">@color/Teal</item>
     </style>
 
+
+    <style name="scstyle" parent="Theme.AppCompat.Light">
+        <!--开启时的颜色-->
+        <item name="colorControlActivated">@color/Teal</item>
+    </style>
 
     <style name="WindowAnimationFadeInOut">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>

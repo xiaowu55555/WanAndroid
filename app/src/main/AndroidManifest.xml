@@ -41,7 +41,7 @@
             android:name=".ui.user.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.me.AboutActivity"
+            android:name=".ui.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.MyCollectActivity"
