@@ -1,4 +1,4 @@
-package com.bingo.wanandroid.api.spcookie;
+package com.bingo.wanandroid.api.cookie;
 
 import java.util.List;
 

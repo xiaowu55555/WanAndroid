@@ -5,18 +5,15 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.bingo.wanandroid.api.HttpResult;
-import com.bingo.wanandroid.api.cookie.CookiesManager;
 import com.bingo.wanandroid.app.App;
 import com.bingo.wanandroid.entity.Article;
-import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.viewmodel.base.SupportViewModel;
-import com.frame.library.base.BaseViewModel;
 import com.frame.library.net.RxSubscriber;
 import com.frame.library.net.RxTransformer;
-import com.frame.library.utils.ToastUtil;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.internal.schedulers.IoScheduler;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserViewModel extends SupportViewModel {
@@ -64,21 +61,22 @@ public class UserViewModel extends SupportViewModel {
     }
 
     public void logout() {
-        CookiesManager.clearAllCookies();
         App.getInstance().logout();
-//        apiService.logout()
-//                .compose(RxTransformer.applySchedulers())
-//                .subscribe(new RxSubscriber<String>(this) {
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        App.getInstance().logout();
-//                    }
-//
-//                    @Override
-//                    public void onFailed(Throwable e) {
-//                        App.getInstance().logout();
-//                    }
-//                });
+        apiService.logout()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
+                    @Override
+                    public void onSuccess(HttpResult result) {
+                        App.getInstance().logout();
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        App.getInstance().logout();
+                    }
+                });
     }
 
     public MutableLiveData<Article> getCollection(int pageIndex) {
@@ -102,11 +100,17 @@ public class UserViewModel extends SupportViewModel {
     public MutableLiveData<Boolean> cancelCollection(long id, long originId) {
         MutableLiveData<Boolean> data = new MutableLiveData<>();
         apiService.cancelCollection(id, originId)
-                .compose(RxTransformer.applySchedulers())
-                .subscribe(new RxSubscriber<String>(this) {
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
                     @Override
-                    public void onSuccess(String s) {
-                        data.setValue(true);
+                    public void onSuccess(HttpResult result) {
+                        if (result.isSuccess()){
+                            data.setValue(true);
+                        } else {
+                            showToast(result.getErrorMsg());
+                        }
                     }
 
                     @Override
@@ -120,11 +124,17 @@ public class UserViewModel extends SupportViewModel {
     public MutableLiveData<Boolean> collect(long id) {
         MutableLiveData<Boolean> data = new MutableLiveData<>();
         apiService.collect(id)
-                .compose(RxTransformer.applySchedulers())
-                .subscribe(new RxSubscriber<String>(this) {
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
                     @Override
-                    public void onSuccess(String s) {
-                        data.setValue(true);
+                    public void onSuccess(HttpResult result) {
+                        if (result.isSuccess()){
+                            data.setValue(true);
+                        } else {
+                            showToast(result.getErrorMsg());
+                        }
                     }
 
                     @Override
@@ -138,11 +148,17 @@ public class UserViewModel extends SupportViewModel {
     public MutableLiveData<Boolean> articleCancelCollection(long id) {
         MutableLiveData<Boolean> data = new MutableLiveData<>();
         apiService.articleCancel(id)
-                .compose(RxTransformer.applySchedulers())
-                .subscribe(new RxSubscriber<String>(this) {
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RxSubscriber<HttpResult>(this) {
                     @Override
-                    public void onSuccess(String s) {
-                        data.setValue(true);
+                    public void onSuccess(HttpResult result) {
+                        if (result.isSuccess()){
+                            data.setValue(true);
+                        } else {
+                            showToast(result.getErrorMsg());
+                        }
                     }
 
                     @Override

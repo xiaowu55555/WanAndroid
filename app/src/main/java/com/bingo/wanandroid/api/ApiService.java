@@ -4,6 +4,7 @@ import com.bingo.wanandroid.entity.Article;
 import com.bingo.wanandroid.entity.HomeBanner;
 import com.bingo.wanandroid.entity.Project;
 import com.bingo.wanandroid.entity.ProjectTree;
+import com.bingo.wanandroid.entity.SearchKey;
 import com.bingo.wanandroid.entity.Tree;
 import com.bingo.wanandroid.entity.User;
 import com.bingo.wanandroid.entity.WxArticle;
@@ -66,7 +67,7 @@ public interface ApiService {
 
     //退出登录
     @GET("user/logout/json")
-    Observable<HttpResult<String>> logout();
+    Observable<HttpResult> logout();
 
     //我的收藏列表
     @GET("lg/collect/list/{pageIndex}/json")
@@ -75,15 +76,15 @@ public interface ApiService {
     //我的收藏取消收藏
     @FormUrlEncoded
     @POST("lg/uncollect/{id}/json")
-    Observable<HttpResult<String>> cancelCollection(@Path("id") long id, @Field("originId") long originId);
+    Observable<HttpResult> cancelCollection(@Path("id") long id, @Field("originId") long originId);
 
     //收藏站内文章
     @POST("lg/collect/{id}/json")
-    Observable<HttpResult<String>> collect(@Path("id") long id);
+    Observable<HttpResult> collect(@Path("id") long id);
 
     //文章列表取消收藏
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<HttpResult<String>> articleCancel(@Path("id") long id);
+    Observable<HttpResult> articleCancel(@Path("id") long id);
 
     //知识体系
     @GET("tree/json")
@@ -93,4 +94,12 @@ public interface ApiService {
     @GET("article/list/{pageIndex}/json?")
     Observable<HttpResult<Article>> getTreeActicel(@Path("pageIndex") int pageIndex, @Query("cid") long cid);
 
+    //搜索热词
+    @GET("https://www.wanandroid.com//hotkey/json")
+    Observable<HttpResult<List<SearchKey>>> getHotKey();
+
+    //搜索
+    @FormUrlEncoded
+    @POST("article/query/{pageIndex}/json")
+    Observable<HttpResult<Article>> getSearchResult(@Path("pageIndex") int pageIndex, @Field("k") String key);
 }

@@ -51,7 +51,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.zhy.view.flowlayout.FlowLayout
+            <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/flow_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -60,7 +60,7 @@
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -73,6 +73,8 @@
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:padding="16dp"
+                    android:id="@+id/iv_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_delete" />
@@ -82,8 +84,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycle_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

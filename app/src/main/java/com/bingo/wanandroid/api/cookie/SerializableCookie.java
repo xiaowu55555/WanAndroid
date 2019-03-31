@@ -1,4 +1,4 @@
-package com.bingo.wanandroid.api.spcookie;
+package com.bingo.wanandroid.api.cookie;
 
 import android.content.ContentValues;
 import android.database.Cursor;
