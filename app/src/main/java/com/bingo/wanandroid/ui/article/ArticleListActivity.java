@@ -61,6 +61,18 @@ public class ArticleListActivity extends BaseListActivity<Article.DatasBean, Art
         tv.setTextColor(Color.WHITE);
         tv.setHintTextColor(getResources().getColor(R.color.bg_gray));
         tv.setTextSize(16);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                ArticleSearchActivity.start(context,s,wxArticle.getId());
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 
     @Override

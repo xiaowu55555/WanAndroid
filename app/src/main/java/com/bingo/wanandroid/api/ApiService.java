@@ -47,6 +47,10 @@ public interface ApiService {
     @GET("wxarticle/list/{id}/{pageIndex}/json")
     Observable<HttpResult<Article>> getWxarticleList(@Path("id") long id, @Path("pageIndex") int pageIndex);
 
+    //在某个公众号中搜索历史文章
+    @GET("wxarticle/list/{id}/{pageIndex}/json")
+    Observable<HttpResult<Article>> searchInWxArticel(@Path("id") long id, @Path("pageIndex") int pageIndex, @Query("k") String key);
+
     //项目分类
     @GET("project/tree/json")
     Observable<HttpResult<List<ProjectTree>>> getProjectTree();

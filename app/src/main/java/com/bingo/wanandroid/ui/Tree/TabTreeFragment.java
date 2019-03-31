@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.adapter.TreeAdapter;
 import com.bingo.wanandroid.entity.Tree;
+import com.bingo.wanandroid.ui.search.SearchActivity;
 import com.bingo.wanandroid.viewmodel.ArticleViewModel;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -36,6 +37,9 @@ public class TabTreeFragment extends BaseListFragment<Tree, ArticleViewModel> {
         new TitleBar().bind(context, rootView).setTitle("知识体系").setMenu(R.menu.menu_search, new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.action_search) {
+                    SearchActivity.start(context);
+                }
                 return false;
             }
         });

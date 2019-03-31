@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bingo.wanandroid.R;
 import com.bingo.wanandroid.entity.ProjectTree;
+import com.bingo.wanandroid.ui.search.SearchActivity;
 import com.bingo.wanandroid.viewmodel.ProjectViewModel;
 import com.frame.library.base.BaseFragment;
 import com.frame.library.widget.MultipleStatusView;
@@ -43,6 +44,9 @@ public class TabProjectFragment extends BaseFragment<ProjectViewModel> {
         new TitleBar().bind(context,rootView).setTitle("项目分类").setMenu(R.menu.menu_search, new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.action_search) {
+                    SearchActivity.start(context);
+                }
                 return false;
             }
         });

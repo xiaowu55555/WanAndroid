@@ -98,4 +98,23 @@ public class SearchViewModel extends SupportViewModel {
         return data;
     }
 
+    //在某个公众号中搜索历史文章
+    public MutableLiveData<Article> searchInWxArticel(long id, int page, String key) {
+        MutableLiveData<Article> data = new MutableLiveData<>();
+        apiService.searchInWxArticel(id, page + 1, key)
+                .compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<Article>(this) {
+                    @Override
+                    public void onSuccess(Article article) {
+                        data.setValue(article);
+                    }
+
+                    @Override
+                    public void onFailed(Throwable e) {
+                        showError(e.getMessage());
+                    }
+                });
+        return data;
+    }
+
 }
