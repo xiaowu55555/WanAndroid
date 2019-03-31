@@ -56,7 +56,7 @@ public class ArticleDetailActivity extends WebViewActivity<UserViewModel> {
                                 if (App.getInstance().isLogin()) {
                                     setCollect();
                                 } else {
-                                    ToastUtil.showToast("您还未登录");
+                                    ToastUtil.showToast("请先登录");
                                 }
                                 break;
                             case R.id.action_share:

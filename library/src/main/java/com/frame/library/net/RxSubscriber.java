@@ -62,17 +62,17 @@ public abstract class RxSubscriber<T> implements Observer<T> {
             }
         } else if (e instanceof UnknownHostException) {
             ex = new ApiException("没有网络");
-//        } else if (e instanceof HttpException) {
-//            ex = new ApiException("网络错误");
-//        } else if (e instanceof SocketTimeoutException) {
-//            ex = new ApiException("网络连接超时");
-//        } else if (e instanceof JsonParseException
-//                || e instanceof JSONException) {
-//            ex = new ApiException("解析错误");
-//        } else if (e instanceof ConnectException) {
-//            ex = new ApiException("连接失败");
-//        } else if (e instanceof javax.net.ssl.SSLHandshakeException) {
-//            ex = new ApiException("证书验证失败");
+        } else if (e instanceof HttpException) {
+            ex = new ApiException("网络错误");
+        } else if (e instanceof SocketTimeoutException) {
+            ex = new ApiException("网络连接超时");
+        } else if (e instanceof JsonParseException
+                || e instanceof JSONException) {
+            ex = new ApiException("解析错误");
+        } else if (e instanceof ConnectException) {
+            ex = new ApiException("连接失败");
+        } else if (e instanceof javax.net.ssl.SSLHandshakeException) {
+            ex = new ApiException("证书验证失败");
         } else {
             ex = new ApiException(e.getMessage());
         }

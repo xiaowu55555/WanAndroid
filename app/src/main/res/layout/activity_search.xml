@@ -8,9 +8,9 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"
+        style="@style/Toolbar.MyStyle"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        style="@style/Toolbar.MyStyle"
         android:background="@color/colorPrimary"
         android:elevation="2dp">
 
@@ -40,8 +40,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热搜"
+                android:textColor="@color/item_title"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.zhy.view.flowlayout.FlowLayout
+                android:id="@+id/flow_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="历史搜索"
+                    android:textColor="@color/item_title"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
 
         </LinearLayout>
 

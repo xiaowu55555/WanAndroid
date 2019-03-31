@@ -7,7 +7,7 @@ package com.frame.library.net;
 public class ApiException extends RuntimeException {
 
     public static final int RSP_CODE_SUCCESS = 0; //操作成功
-    public static final int RSP_CODE_NEED_LOGIN = 1000; //需要登陆
+    public static final int RSP_CODE_NEED_LOGIN = -1001; //需要登陆
     private int code;
     private String msg;
 

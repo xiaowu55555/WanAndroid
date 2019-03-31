@@ -15,6 +15,7 @@ import com.frame.library.base.BaseSwipeBackActivity;
 import com.frame.library.base.BaseViewModel;
 import com.frame.library.utils.KeyboardUtils;
 import com.frame.library.utils.ToastUtil;
+import com.zhy.view.flowlayout.FlowLayout;
 
 public class SearchActivity extends BaseSwipeBackActivity {
 
@@ -51,6 +52,8 @@ public class SearchActivity extends BaseSwipeBackActivity {
                 return false;
             }
         });
+        FlowLayout flowLayout = findViewById(R.id.flow_layout);
+
     }
 
     @Override

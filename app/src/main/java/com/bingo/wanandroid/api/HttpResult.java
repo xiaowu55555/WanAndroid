@@ -2,8 +2,10 @@ package com.bingo.wanandroid.api;
 
 import com.frame.library.net.IApiResult;
 
-public class HttpResult<T> implements IApiResult<T> {
+import io.reactivex.annotations.Nullable;
 
+public class HttpResult<T> implements IApiResult<T> {
+    @Nullable
     private T data;
     private int errorCode;
     private String errorMsg;
@@ -32,6 +34,9 @@ public class HttpResult<T> implements IApiResult<T> {
 
     @Override
     public T getData() {
+        if (data == null) {
+            return (T) "";
+        }
         return data;
     }
 

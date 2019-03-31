@@ -67,12 +67,10 @@ public class UserViewModel extends SupportViewModel {
         CookiesManager.clearAllCookies();
         App.getInstance().logout();
 //        apiService.logout()
-//                .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new RxSubscriber<HttpResult>(this) {
+//                .compose(RxTransformer.applySchedulers())
+//                .subscribe(new RxSubscriber<String>(this) {
 //                    @Override
-//                    public void onSuccess(HttpResult result) {
+//                    public void onSuccess(String result) {
 //                        App.getInstance().logout();
 //                    }
 //
@@ -104,12 +102,10 @@ public class UserViewModel extends SupportViewModel {
     public MutableLiveData<Boolean> cancelCollection(long id, long originId) {
         MutableLiveData<Boolean> data = new MutableLiveData<>();
         apiService.cancelCollection(id, originId)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RxSubscriber<HttpResult>(this) {
+                .compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<String>(this) {
                     @Override
-                    public void onSuccess(HttpResult result) {
+                    public void onSuccess(String s) {
                         data.setValue(true);
                     }
 
@@ -124,12 +120,10 @@ public class UserViewModel extends SupportViewModel {
     public MutableLiveData<Boolean> collect(long id) {
         MutableLiveData<Boolean> data = new MutableLiveData<>();
         apiService.collect(id)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RxSubscriber<HttpResult>(this) {
+                .compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<String>(this) {
                     @Override
-                    public void onSuccess(HttpResult result) {
+                    public void onSuccess(String s) {
                         data.setValue(true);
                     }
 
@@ -144,12 +138,10 @@ public class UserViewModel extends SupportViewModel {
     public MutableLiveData<Boolean> articleCancelCollection(long id) {
         MutableLiveData<Boolean> data = new MutableLiveData<>();
         apiService.articleCancel(id)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RxSubscriber<HttpResult>(this) {
+                .compose(RxTransformer.applySchedulers())
+                .subscribe(new RxSubscriber<String>(this) {
                     @Override
-                    public void onSuccess(HttpResult result) {
+                    public void onSuccess(String s) {
                         data.setValue(true);
                     }
 

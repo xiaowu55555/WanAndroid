@@ -55,7 +55,8 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
 
     }
 
-    protected void beforeInit(){}
+    protected void beforeInit() {
+    }
 
     protected void setToolBar() {
 
@@ -91,6 +92,9 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
                         break;
                     case ActionEvent.SHOW_TOAST:
                         ToastUtil.showToast(actionEvent.getMessage());
+                        break;
+                    case ActionEvent.NEED_LOGIN:
+                        ToastUtil.showToast("请重新登录");
                         break;
                 }
             });

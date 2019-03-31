@@ -1,7 +1,8 @@
 package com.bingo.wanandroid.api;
 
-
-import com.bingo.wanandroid.api.cookie.CookiesManager;
+import com.bingo.wanandroid.api.spcookie.CookieJarImpl;
+import com.bingo.wanandroid.api.spcookie.SPCookieStore;
+import com.bingo.wanandroid.app.App;
 import com.frame.library.net.interceptor.HttpInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -40,7 +41,7 @@ public class HttpClient {
 //                .addInterceptor(cacheInterceptor)
 //                .cache(cache)
                 .retryOnConnectionFailure(true)
-                .cookieJar(new CookiesManager());
+                .cookieJar(new CookieJarImpl(new SPCookieStore(App.getInstance())));
 
         return new Retrofit.Builder()
                 .client(builder.build())
